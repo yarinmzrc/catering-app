@@ -1,0 +1,69 @@
+import { Button } from "@/components/ui/button"
+import { prisma } from "../../../../prisma/client"
+import { PageHeader } from "../_components/page-header"
+import Link from "next/link"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { Category } from "../../../../prisma/generated/prisma/client"
+async function getCategories() {
+  return await prisma.category.findMany({
+    orderBy: {
+      name: "asc",
+    },
+  })
+}
+
+export default async function AdminCategoriesPage() {
+  const categories = await getCategories()
+  return (
+    <>
+      <div className="mb-4 flex items-center justify-between gap-4">
+        <PageHeader>Categories</PageHeader>
+        <Button asChild>
+          <Link href="/admin/categories/new">Add Category</Link>
+        </Button>
+      </div>
+      <CategoriesTable categories={categories} />
+    </>
+  )
+}
+
+type CategoriesTableProps = {
+  categories: Category[]
+}
+
+function CategoriesTable({ categories }: CategoriesTableProps) {
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead className="w-0">
+            <span className="sr-only">Available for purchase</span>
+          </TableHead>
+          <TableHead>Name</TableHead>
+          <TableHead className="w-0">
+            <span className="sr-only">Actions</span>
+          </TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {categories.map((category) => (
+          <TableRow key={category.id}>
+            <TableCell>{category.name}</TableCell>
+            <TableCell>
+              <Button asChild>
+                <Link href={`/admin/categories/${category.id}`}>Edit</Link>
+              </Button>
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  )
+}

@@ -2,10 +2,10 @@ import { prisma } from "./client"
 
 async function main() {
   // Clean up existsing data
-  await prisma.orderItem.deleteMany()
-  await prisma.category.deleteMany()
+  // await prisma.orderItem.deleteMany()
   await prisma.order.deleteMany()
   await prisma.product.deleteMany()
+  await prisma.category.deleteMany()
 
   // Create categories
   const categoriesData = [
