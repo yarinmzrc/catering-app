@@ -17,9 +17,10 @@ import {
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
-import { addProduct, updateProduct } from "../../_actions/products"
 import { useFormStatus } from "react-dom"
 import Image from "next/image"
+import { createProduct } from "@/features/products/actions/create-product"
+import { updateProduct } from "@/features/products/actions/update-product"
 
 type ProductFormProps = {
   product?: Product
@@ -27,7 +28,7 @@ type ProductFormProps = {
 }
 export function ProductForm({ product, categories }: ProductFormProps) {
   const [error, action] = useActionState(
-    product == null ? addProduct : updateProduct.bind(null, product.id),
+    product == null ? createProduct : updateProduct.bind(null, product.id),
     {},
   )
   const [price, setPrice] = useState<number | null>(product?.price ?? null)

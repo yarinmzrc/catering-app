@@ -2,11 +2,9 @@
 
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu"
 import { useTransition } from "react"
-import {
-  deleteProduct,
-  toggleProductAvailability,
-} from "../../_actions/products"
 import { useRouter } from "next/navigation"
+import { deleteProduct } from "@/features/products/actions/delete-product"
+import { toggleProductAvailability } from "@/features/products/actions/toggle-product-availability"
 
 type ActiveToggleDropdownActionProps = {
   id: string

@@ -6,62 +6,18 @@ import { z } from "zod"
 import { prisma } from "../../../../prisma/client"
 import { revalidatePath } from "next/cache"
 import { getProduct } from "@/features/products/server/get-product"
+import { createProductSchema } from "./create-product"
 
-const requiredImageSchema = z
-  .instanceof(File)
-  .refine((file) => file.type.startsWith("image/"), "Invalid image type")
-  .refine((file) => file.size > 0, "Image is required")
-
-const optionalImageSchema = z
+const imageSchema = z
   .instanceof(File)
   .refine((file) => file.type.startsWith("image/"), "Invalid image type")
   .optional()
 
-const addProductSchema = z.object({
-  name: z.string().min(1),
-  price: z.coerce.number().int().min(1),
-  description: z.string().min(1),
-  imagePath: requiredImageSchema,
-  categoryId: z.string(),
-})
-
-export async function addProduct(_: unknown, formData: FormData) {
-  const result = addProductSchema.safeParse(
-    Object.fromEntries(formData.entries()),
-  )
-
-  if (result.success === false) {
-    return z.flattenError(result.error).fieldErrors
-  }
-
-  const data = result.data
-
-  await fs.mkdir("public/products", { recursive: true })
-  const imagePath = `/products/${crypto.randomUUID()}-${data.imagePath.name}`
-  await fs.writeFile(
-    `public${imagePath}`,
-    Buffer.from(await data.imagePath.arrayBuffer()),
-  )
-
-  await prisma.product.create({
-    data: {
-      name: data.name,
-      price: data.price,
-      description: data.description,
-      imagePath,
-      categoryId: data.categoryId,
-    },
+const updateProductSchema = createProductSchema
+  .omit({ imagePath: true })
+  .extend({
+    imagePath: imageSchema,
   })
-
-  revalidatePath("/")
-  revalidatePath("/products")
-
-  redirect("/admin/products")
-}
-
-const updateProductSchema = addProductSchema.omit({ imagePath: true }).extend({
-  imagePath: optionalImageSchema,
-})
 
 export async function updateProduct(
   id: string,
