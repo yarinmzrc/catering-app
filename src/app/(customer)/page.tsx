@@ -5,22 +5,28 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { Suspense } from "react"
 import { ProductCard, ProductCardSkeleton } from "@/components/product-card"
+import { cache } from "@/lib/cache"
+import { ONE_DAY_IN_SECONDS } from "@/constants"
 
-async function getMostPopularProducts() {
-  return await prisma.product.findMany({
-    where: { isAvailableForSale: true },
-    orderBy: { orderItems: { _count: "desc" } },
-    take: 6,
-  })
-}
+const getMostPopularProducts = cache(
+  async () => {
+    return await prisma.product.findMany({
+      where: { isAvailableForSale: true },
+      orderBy: { orderItems: { _count: "desc" } },
+      take: 6,
+    })
+  },
+  ["/", "getMostPopularProducts"],
+  { revalidate: ONE_DAY_IN_SECONDS },
+)
 
-async function getNewestProducts() {
+const getNewestProducts = cache(async () => {
   return await prisma.product.findMany({
     where: { isAvailableForSale: true },
     orderBy: { createdAt: "desc" },
     take: 6,
   })
-}
+}, ["/", "getNewestProducts"])
 
 export default function HomePage() {
   return (

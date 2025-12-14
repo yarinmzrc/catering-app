@@ -4,20 +4,23 @@ import fs from "fs/promises"
 import { notFound, redirect } from "next/navigation"
 import { z } from "zod"
 import { prisma } from "../../../../prisma/client"
+import { revalidatePath } from "next/cache"
 
-const imageSchema = z
-  .instanceof(File, { error: "Image is required" })
-  .refine(
-    (file) => file.size === 0 || file.type.startsWith("image/"),
-    "Required",
-  )
+const requiredImageSchema = z
+  .instanceof(File)
+  .refine((file) => file.type.startsWith("image/"), "Invalid image type")
   .refine((file) => file.size > 0, "Image is required")
+
+const optionalImageSchema = z
+  .instanceof(File)
+  .refine((file) => file.type.startsWith("image/"), "Invalid image type")
+  .optional()
 
 const addProductSchema = z.object({
   name: z.string().min(1),
   price: z.coerce.number().int().min(1),
   description: z.string().min(1),
-  imagePath: imageSchema,
+  imagePath: requiredImageSchema,
   categoryId: z.string(),
 })
 
@@ -49,11 +52,14 @@ export async function addProduct(_: unknown, formData: FormData) {
     },
   })
 
+  revalidatePath("/")
+  revalidatePath("/products")
+
   redirect("/admin/products")
 }
 
-const updateProductSchema = addProductSchema.extend({
-  imagePath: imageSchema.optional(),
+const updateProductSchema = addProductSchema.omit({ imagePath: true }).extend({
+  imagePath: optionalImageSchema,
 })
 
 export async function updateProduct(
@@ -64,7 +70,7 @@ export async function updateProduct(
   const result = updateProductSchema.safeParse(
     Object.fromEntries(formData.entries()),
   )
-
+  console.log({ result })
   if (result.success === false) {
     return z.flattenError(result.error).fieldErrors
   }
@@ -95,6 +101,9 @@ export async function updateProduct(
     },
   })
 
+  revalidatePath("/")
+  revalidatePath("/products")
+
   redirect("/admin/products")
 }
 
@@ -113,4 +122,7 @@ export async function deleteProduct(productId: string) {
   if (product == null) return notFound()
 
   await fs.unlink(`public${product.imagePath}`)
+
+  revalidatePath("/")
+  revalidatePath("/products")
 }
