@@ -6,19 +6,7 @@ import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 import { paths } from "@/config/paths"
 import { uploadToCloudinary } from "@/lib/cloudinary"
-
-const imageSchema = z
-  .instanceof(File)
-  .refine((file) => file.type.startsWith("image/"), "Invalid image type")
-  .refine((file) => file.size > 0, "Image is required")
-
-export const createProductSchema = z.object({
-  name: z.string().min(1),
-  price: z.coerce.number().int().min(1),
-  description: z.string().min(1),
-  imagePath: imageSchema,
-  categoryId: z.string(),
-})
+import { createProductSchema } from "../schemas"
 
 export async function createProduct(_: unknown, formData: FormData) {
   const result = createProductSchema.safeParse(

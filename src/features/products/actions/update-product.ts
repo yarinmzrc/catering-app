@@ -6,19 +6,8 @@ import { z } from "zod"
 import { prisma } from "../../../../prisma/client"
 import { revalidatePath } from "next/cache"
 import { getProduct } from "@/features/products/server/get-product"
-import { createProductSchema } from "./create-product"
 import { deleteFromCloudinary, uploadToCloudinary } from "@/lib/cloudinary"
-
-const imageSchema = z
-  .instanceof(File)
-  .refine((file) => file.type.startsWith("image/"), "Invalid image type")
-  .optional()
-
-const updateProductSchema = createProductSchema
-  .omit({ imagePath: true })
-  .extend({
-    imagePath: imageSchema,
-  })
+import { updateProductSchema } from "../schemas"
 
 export async function updateProduct(
   id: string,
