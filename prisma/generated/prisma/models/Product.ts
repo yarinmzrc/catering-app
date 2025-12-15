@@ -7,7 +7,7 @@
  *
  * 🟢 You can import this file directly.
  */
-import type * as runtime from "@prisma/client/runtime/client"
+import type * as runtime from "@prisma/client/runtime/library"
 import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 
@@ -359,7 +359,6 @@ export type ProductUncheckedCreateInput = {
 }
 
 export type ProductUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -372,7 +371,6 @@ export type ProductUpdateInput = {
 }
 
 export type ProductUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -397,7 +395,6 @@ export type ProductCreateManyInput = {
 }
 
 export type ProductUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -408,7 +405,6 @@ export type ProductUpdateManyMutationInput = {
 }
 
 export type ProductUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -736,7 +732,6 @@ export type ProductUpdateToOneWithWhereWithoutOrderItemsInput = {
 }
 
 export type ProductUpdateWithoutOrderItemsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -748,7 +743,6 @@ export type ProductUpdateWithoutOrderItemsInput = {
 }
 
 export type ProductUncheckedUpdateWithoutOrderItemsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -771,7 +765,6 @@ export type ProductCreateManyCategoryInput = {
 }
 
 export type ProductUpdateWithoutCategoryInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -783,7 +776,6 @@ export type ProductUpdateWithoutCategoryInput = {
 }
 
 export type ProductUncheckedUpdateWithoutCategoryInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -795,7 +787,6 @@ export type ProductUncheckedUpdateWithoutCategoryInput = {
 }
 
 export type ProductUncheckedUpdateManyWithoutCategoryInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
@@ -864,44 +855,6 @@ export type ProductSelect<
   ExtArgs["result"]["product"]
 >
 
-export type ProductSelectCreateManyAndReturn<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
-> = runtime.Types.Extensions.GetSelect<
-  {
-    id?: boolean
-    name?: boolean
-    price?: boolean
-    description?: boolean
-    imagePath?: boolean
-    isAvailableForSale?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    categoryId?: boolean
-    category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
-  },
-  ExtArgs["result"]["product"]
->
-
-export type ProductSelectUpdateManyAndReturn<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
-> = runtime.Types.Extensions.GetSelect<
-  {
-    id?: boolean
-    name?: boolean
-    price?: boolean
-    description?: boolean
-    imagePath?: boolean
-    isAvailableForSale?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    categoryId?: boolean
-    category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
-  },
-  ExtArgs["result"]["product"]
->
-
 export type ProductSelectScalar = {
   id?: boolean
   name?: boolean
@@ -936,18 +889,6 @@ export type ProductInclude<
   orderItems?: boolean | Prisma.Product$orderItemsArgs<ExtArgs>
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ProductCountOutputTypeDefaultArgs<ExtArgs>
-}
-export type ProductIncludeCreateManyAndReturn<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
-> = {
-  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
-}
-export type ProductIncludeUpdateManyAndReturn<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
-> = {
-  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }
 
 export type $ProductPayload<
@@ -1172,39 +1113,6 @@ export interface ProductDelegate<
   ): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Create many Products and returns the data saved in the database.
-   * @param {ProductCreateManyAndReturnArgs} args - Arguments to create many Products.
-   * @example
-   * // Create many Products
-   * const product = await prisma.product.createManyAndReturn({
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   *
-   * // Create many Products and only return the `id`
-   * const productWithIdOnly = await prisma.product.createManyAndReturn({
-   *   select: { id: true },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   *
-   */
-  createManyAndReturn<T extends ProductCreateManyAndReturnArgs>(
-    args?: Prisma.SelectSubset<T, ProductCreateManyAndReturnArgs<ExtArgs>>,
-  ): Prisma.PrismaPromise<
-    runtime.Types.Result.GetResult<
-      Prisma.$ProductPayload<ExtArgs>,
-      T,
-      "createManyAndReturn",
-      GlobalOmitOptions
-    >
-  >
-
-  /**
    * Delete a Product.
    * @param {ProductDeleteArgs} args - Arguments to delete one Product.
    * @example
@@ -1297,45 +1205,6 @@ export interface ProductDelegate<
   ): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Update zero or more Products and returns the data updated in the database.
-   * @param {ProductUpdateManyAndReturnArgs} args - Arguments to update many Products.
-   * @example
-   * // Update many Products
-   * const product = await prisma.product.updateManyAndReturn({
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   *
-   * // Update zero or more Products and only return the `id`
-   * const productWithIdOnly = await prisma.product.updateManyAndReturn({
-   *   select: { id: true },
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   *
-   */
-  updateManyAndReturn<T extends ProductUpdateManyAndReturnArgs>(
-    args: Prisma.SelectSubset<T, ProductUpdateManyAndReturnArgs<ExtArgs>>,
-  ): Prisma.PrismaPromise<
-    runtime.Types.Result.GetResult<
-      Prisma.$ProductPayload<ExtArgs>,
-      T,
-      "updateManyAndReturn",
-      GlobalOmitOptions
-    >
-  >
-
-  /**
    * Create or update one Product.
    * @param {ProductUpsertArgs} args - Arguments to update or create a Product.
    * @example
@@ -1365,6 +1234,33 @@ export interface ProductDelegate<
     ExtArgs,
     GlobalOmitOptions
   >
+
+  /**
+   * Find zero or more Products that matches the filter.
+   * @param {ProductFindRawArgs} args - Select which filters you would like to apply.
+   * @example
+   * const product = await prisma.product.findRaw({
+   *   filter: { age: { $gt: 25 } }
+   * })
+   */
+  findRaw(
+    args?: Prisma.ProductFindRawArgs,
+  ): Prisma.PrismaPromise<Prisma.JsonObject>
+
+  /**
+   * Perform aggregation operations on a Product.
+   * @param {ProductAggregateRawArgs} args - Select which aggregations you would like to apply.
+   * @example
+   * const product = await prisma.product.aggregateRaw({
+   *   pipeline: [
+   *     { $match: { status: "registered" } },
+   *     { $group: { _id: "$country", total: { $sum: 1 } } }
+   *   ]
+   * })
+   */
+  aggregateRaw(
+    args?: Prisma.ProductAggregateRawArgs,
+  ): Prisma.PrismaPromise<Prisma.JsonObject>
 
   /**
    * Count the number of Products.
@@ -1857,31 +1753,6 @@ export type ProductCreateManyArgs<
 }
 
 /**
- * Product createManyAndReturn
- */
-export type ProductCreateManyAndReturnArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
-> = {
-  /**
-   * Select specific fields to fetch from the Product
-   */
-  select?: Prisma.ProductSelectCreateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the Product
-   */
-  omit?: Prisma.ProductOmit<ExtArgs> | null
-  /**
-   * The data used to create many Products.
-   */
-  data: Prisma.ProductCreateManyInput | Prisma.ProductCreateManyInput[]
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ProductIncludeCreateManyAndReturn<ExtArgs> | null
-}
-
-/**
  * Product update
  */
 export type ProductUpdateArgs<
@@ -1935,42 +1806,6 @@ export type ProductUpdateManyArgs<
    * Limit how many Products to update.
    */
   limit?: number
-}
-
-/**
- * Product updateManyAndReturn
- */
-export type ProductUpdateManyAndReturnArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
-> = {
-  /**
-   * Select specific fields to fetch from the Product
-   */
-  select?: Prisma.ProductSelectUpdateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the Product
-   */
-  omit?: Prisma.ProductOmit<ExtArgs> | null
-  /**
-   * The data used to update Products.
-   */
-  data: Prisma.XOR<
-    Prisma.ProductUpdateManyMutationInput,
-    Prisma.ProductUncheckedUpdateManyInput
-  >
-  /**
-   * Filter which Products to update
-   */
-  where?: Prisma.ProductWhereInput
-  /**
-   * Limit how many Products to update.
-   */
-  limit?: number
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ProductIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -2052,6 +1887,40 @@ export type ProductDeleteManyArgs<
    * Limit how many Products to delete.
    */
   limit?: number
+}
+
+/**
+ * Product findRaw
+ */
+export type ProductFindRawArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+   */
+  filter?: runtime.InputJsonValue
+  /**
+   * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+   */
+  options?: runtime.InputJsonValue
+}
+
+/**
+ * Product aggregateRaw
+ */
+export type ProductAggregateRawArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+   */
+  pipeline?: runtime.InputJsonValue[]
+  /**
+   * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+   */
+  options?: runtime.InputJsonValue
 }
 
 /**

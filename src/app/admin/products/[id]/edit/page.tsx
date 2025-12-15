@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation"
-import { prisma } from "../../../../../../prisma/client"
 import { PageHeader } from "../../../_components/page-header"
 import { ProductForm } from "../../_components/product-form"
 import { getProduct } from "@/features/products/server/get-product"

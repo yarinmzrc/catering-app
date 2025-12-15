@@ -7,7 +7,7 @@
  *
  * 🟢 You can import this file directly.
  */
-import type * as runtime from "@prisma/client/runtime/client"
+import type * as runtime from "@prisma/client/runtime/library"
 import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 
@@ -319,7 +319,6 @@ export type OrderItemUncheckedCreateInput = {
 }
 
 export type OrderItemUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -328,7 +327,6 @@ export type OrderItemUpdateInput = {
 }
 
 export type OrderItemUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -346,14 +344,12 @@ export type OrderItemCreateManyInput = {
 }
 
 export type OrderItemUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type OrderItemUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -749,7 +745,6 @@ export type OrderItemCreateManyProductInput = {
 }
 
 export type OrderItemUpdateWithoutProductInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -757,7 +752,6 @@ export type OrderItemUpdateWithoutProductInput = {
 }
 
 export type OrderItemUncheckedUpdateWithoutProductInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -765,7 +759,6 @@ export type OrderItemUncheckedUpdateWithoutProductInput = {
 }
 
 export type OrderItemUncheckedUpdateManyWithoutProductInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -781,7 +774,6 @@ export type OrderItemCreateManyOrderInput = {
 }
 
 export type OrderItemUpdateWithoutOrderInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -789,7 +781,6 @@ export type OrderItemUpdateWithoutOrderInput = {
 }
 
 export type OrderItemUncheckedUpdateWithoutOrderInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -797,7 +788,6 @@ export type OrderItemUncheckedUpdateWithoutOrderInput = {
 }
 
 export type OrderItemUncheckedUpdateManyWithoutOrderInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -805,40 +795,6 @@ export type OrderItemUncheckedUpdateManyWithoutOrderInput = {
 }
 
 export type OrderItemSelect<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
-> = runtime.Types.Extensions.GetSelect<
-  {
-    id?: boolean
-    price?: boolean
-    quantity?: boolean
-    createdAt?: boolean
-    orderId?: boolean
-    productId?: boolean
-    order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
-    product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
-  },
-  ExtArgs["result"]["orderItem"]
->
-
-export type OrderItemSelectCreateManyAndReturn<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
-> = runtime.Types.Extensions.GetSelect<
-  {
-    id?: boolean
-    price?: boolean
-    quantity?: boolean
-    createdAt?: boolean
-    orderId?: boolean
-    productId?: boolean
-    order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
-    product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
-  },
-  ExtArgs["result"]["orderItem"]
->
-
-export type OrderItemSelectUpdateManyAndReturn<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetSelect<
@@ -872,20 +828,6 @@ export type OrderItemOmit<
   ExtArgs["result"]["orderItem"]
 >
 export type OrderItemInclude<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
-> = {
-  order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
-}
-export type OrderItemIncludeCreateManyAndReturn<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
-> = {
-  order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
-  product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
-}
-export type OrderItemIncludeUpdateManyAndReturn<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
@@ -1112,39 +1054,6 @@ export interface OrderItemDelegate<
   ): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Create many OrderItems and returns the data saved in the database.
-   * @param {OrderItemCreateManyAndReturnArgs} args - Arguments to create many OrderItems.
-   * @example
-   * // Create many OrderItems
-   * const orderItem = await prisma.orderItem.createManyAndReturn({
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   *
-   * // Create many OrderItems and only return the `id`
-   * const orderItemWithIdOnly = await prisma.orderItem.createManyAndReturn({
-   *   select: { id: true },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   *
-   */
-  createManyAndReturn<T extends OrderItemCreateManyAndReturnArgs>(
-    args?: Prisma.SelectSubset<T, OrderItemCreateManyAndReturnArgs<ExtArgs>>,
-  ): Prisma.PrismaPromise<
-    runtime.Types.Result.GetResult<
-      Prisma.$OrderItemPayload<ExtArgs>,
-      T,
-      "createManyAndReturn",
-      GlobalOmitOptions
-    >
-  >
-
-  /**
    * Delete a OrderItem.
    * @param {OrderItemDeleteArgs} args - Arguments to delete one OrderItem.
    * @example
@@ -1237,45 +1146,6 @@ export interface OrderItemDelegate<
   ): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Update zero or more OrderItems and returns the data updated in the database.
-   * @param {OrderItemUpdateManyAndReturnArgs} args - Arguments to update many OrderItems.
-   * @example
-   * // Update many OrderItems
-   * const orderItem = await prisma.orderItem.updateManyAndReturn({
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   *
-   * // Update zero or more OrderItems and only return the `id`
-   * const orderItemWithIdOnly = await prisma.orderItem.updateManyAndReturn({
-   *   select: { id: true },
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   *
-   */
-  updateManyAndReturn<T extends OrderItemUpdateManyAndReturnArgs>(
-    args: Prisma.SelectSubset<T, OrderItemUpdateManyAndReturnArgs<ExtArgs>>,
-  ): Prisma.PrismaPromise<
-    runtime.Types.Result.GetResult<
-      Prisma.$OrderItemPayload<ExtArgs>,
-      T,
-      "updateManyAndReturn",
-      GlobalOmitOptions
-    >
-  >
-
-  /**
    * Create or update one OrderItem.
    * @param {OrderItemUpsertArgs} args - Arguments to update or create a OrderItem.
    * @example
@@ -1305,6 +1175,33 @@ export interface OrderItemDelegate<
     ExtArgs,
     GlobalOmitOptions
   >
+
+  /**
+   * Find zero or more OrderItems that matches the filter.
+   * @param {OrderItemFindRawArgs} args - Select which filters you would like to apply.
+   * @example
+   * const orderItem = await prisma.orderItem.findRaw({
+   *   filter: { age: { $gt: 25 } }
+   * })
+   */
+  findRaw(
+    args?: Prisma.OrderItemFindRawArgs,
+  ): Prisma.PrismaPromise<Prisma.JsonObject>
+
+  /**
+   * Perform aggregation operations on a OrderItem.
+   * @param {OrderItemAggregateRawArgs} args - Select which aggregations you would like to apply.
+   * @example
+   * const orderItem = await prisma.orderItem.aggregateRaw({
+   *   pipeline: [
+   *     { $match: { status: "registered" } },
+   *     { $group: { _id: "$country", total: { $sum: 1 } } }
+   *   ]
+   * })
+   */
+  aggregateRaw(
+    args?: Prisma.OrderItemAggregateRawArgs,
+  ): Prisma.PrismaPromise<Prisma.JsonObject>
 
   /**
    * Count the number of OrderItems.
@@ -1797,31 +1694,6 @@ export type OrderItemCreateManyArgs<
 }
 
 /**
- * OrderItem createManyAndReturn
- */
-export type OrderItemCreateManyAndReturnArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
-> = {
-  /**
-   * Select specific fields to fetch from the OrderItem
-   */
-  select?: Prisma.OrderItemSelectCreateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the OrderItem
-   */
-  omit?: Prisma.OrderItemOmit<ExtArgs> | null
-  /**
-   * The data used to create many OrderItems.
-   */
-  data: Prisma.OrderItemCreateManyInput | Prisma.OrderItemCreateManyInput[]
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.OrderItemIncludeCreateManyAndReturn<ExtArgs> | null
-}
-
-/**
  * OrderItem update
  */
 export type OrderItemUpdateArgs<
@@ -1875,42 +1747,6 @@ export type OrderItemUpdateManyArgs<
    * Limit how many OrderItems to update.
    */
   limit?: number
-}
-
-/**
- * OrderItem updateManyAndReturn
- */
-export type OrderItemUpdateManyAndReturnArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
-> = {
-  /**
-   * Select specific fields to fetch from the OrderItem
-   */
-  select?: Prisma.OrderItemSelectUpdateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the OrderItem
-   */
-  omit?: Prisma.OrderItemOmit<ExtArgs> | null
-  /**
-   * The data used to update OrderItems.
-   */
-  data: Prisma.XOR<
-    Prisma.OrderItemUpdateManyMutationInput,
-    Prisma.OrderItemUncheckedUpdateManyInput
-  >
-  /**
-   * Filter which OrderItems to update
-   */
-  where?: Prisma.OrderItemWhereInput
-  /**
-   * Limit how many OrderItems to update.
-   */
-  limit?: number
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.OrderItemIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1992,6 +1828,40 @@ export type OrderItemDeleteManyArgs<
    * Limit how many OrderItems to delete.
    */
   limit?: number
+}
+
+/**
+ * OrderItem findRaw
+ */
+export type OrderItemFindRawArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+   */
+  filter?: runtime.InputJsonValue
+  /**
+   * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+   */
+  options?: runtime.InputJsonValue
+}
+
+/**
+ * OrderItem aggregateRaw
+ */
+export type OrderItemAggregateRawArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+   */
+  pipeline?: runtime.InputJsonValue[]
+  /**
+   * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+   */
+  options?: runtime.InputJsonValue
 }
 
 /**

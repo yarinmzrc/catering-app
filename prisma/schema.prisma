@@ -7,11 +7,12 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mongodb"
+  url = env("DATABASE_URL")
 }
 
 model User {
-  id String @id @default(uuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   email String @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -20,7 +21,7 @@ model User {
 }
 
 model Product {
-  id String @id @default(uuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   name String
   price Int
   description String
@@ -29,14 +30,14 @@ model Product {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  categoryId String
+  categoryId String @db.ObjectId
   orderItems OrderItem[]
 
   category Category @relation(fields: [categoryId], references: [id])
 }
 
 model Category {
-  id String @id @default(uuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   name String @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -45,25 +46,25 @@ model Category {
 }
 
 model Order {
-  id String @id @default(uuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   pricePaid Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  userId String
+  userId String @db.ObjectId
   orderItems OrderItem[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model OrderItem {
-  id String @id @default(uuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   price Int
   quantity Int
   createdAt DateTime @default(now())
 
-  orderId String
-  productId String
+  orderId String @db.ObjectId
+  productId String @db.ObjectId
 
   order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
   product Product @relation(fields: [productId], references: [id], onDelete: Restrict)

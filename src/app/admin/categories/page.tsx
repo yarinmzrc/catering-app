@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button"
-import { prisma } from "../../../../prisma/client"
 import { PageHeader } from "../_components/page-header"
 import Link from "next/link"
 import {

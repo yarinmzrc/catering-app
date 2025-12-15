@@ -7,7 +7,7 @@
  *
  * 🟢 You can import this file directly.
  */
-import type * as runtime from "@prisma/client/runtime/client"
+import type * as runtime from "@prisma/client/runtime/library"
 import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 
@@ -244,7 +244,6 @@ export type CategoryUncheckedCreateInput = {
 }
 
 export type CategoryUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -252,7 +251,6 @@ export type CategoryUpdateInput = {
 }
 
 export type CategoryUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -267,14 +265,12 @@ export type CategoryCreateManyInput = {
 }
 
 export type CategoryUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CategoryUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -375,14 +371,12 @@ export type CategoryUpdateToOneWithWhereWithoutProductsInput = {
 }
 
 export type CategoryUpdateWithoutProductsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CategoryUncheckedUpdateWithoutProductsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -441,32 +435,6 @@ export type CategorySelect<
   ExtArgs["result"]["category"]
 >
 
-export type CategorySelectCreateManyAndReturn<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
-> = runtime.Types.Extensions.GetSelect<
-  {
-    id?: boolean
-    name?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  },
-  ExtArgs["result"]["category"]
->
-
-export type CategorySelectUpdateManyAndReturn<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
-> = runtime.Types.Extensions.GetSelect<
-  {
-    id?: boolean
-    name?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  },
-  ExtArgs["result"]["category"]
->
-
 export type CategorySelectScalar = {
   id?: boolean
   name?: boolean
@@ -488,14 +456,6 @@ export type CategoryInclude<
   products?: boolean | Prisma.Category$productsArgs<ExtArgs>
   _count?: boolean | Prisma.CategoryCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type CategoryIncludeCreateManyAndReturn<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
-> = {}
-export type CategoryIncludeUpdateManyAndReturn<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
-> = {}
 
 export type $CategoryPayload<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
@@ -713,39 +673,6 @@ export interface CategoryDelegate<
   ): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Create many Categories and returns the data saved in the database.
-   * @param {CategoryCreateManyAndReturnArgs} args - Arguments to create many Categories.
-   * @example
-   * // Create many Categories
-   * const category = await prisma.category.createManyAndReturn({
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   *
-   * // Create many Categories and only return the `id`
-   * const categoryWithIdOnly = await prisma.category.createManyAndReturn({
-   *   select: { id: true },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   *
-   */
-  createManyAndReturn<T extends CategoryCreateManyAndReturnArgs>(
-    args?: Prisma.SelectSubset<T, CategoryCreateManyAndReturnArgs<ExtArgs>>,
-  ): Prisma.PrismaPromise<
-    runtime.Types.Result.GetResult<
-      Prisma.$CategoryPayload<ExtArgs>,
-      T,
-      "createManyAndReturn",
-      GlobalOmitOptions
-    >
-  >
-
-  /**
    * Delete a Category.
    * @param {CategoryDeleteArgs} args - Arguments to delete one Category.
    * @example
@@ -838,45 +765,6 @@ export interface CategoryDelegate<
   ): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Update zero or more Categories and returns the data updated in the database.
-   * @param {CategoryUpdateManyAndReturnArgs} args - Arguments to update many Categories.
-   * @example
-   * // Update many Categories
-   * const category = await prisma.category.updateManyAndReturn({
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   *
-   * // Update zero or more Categories and only return the `id`
-   * const categoryWithIdOnly = await prisma.category.updateManyAndReturn({
-   *   select: { id: true },
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   *
-   */
-  updateManyAndReturn<T extends CategoryUpdateManyAndReturnArgs>(
-    args: Prisma.SelectSubset<T, CategoryUpdateManyAndReturnArgs<ExtArgs>>,
-  ): Prisma.PrismaPromise<
-    runtime.Types.Result.GetResult<
-      Prisma.$CategoryPayload<ExtArgs>,
-      T,
-      "updateManyAndReturn",
-      GlobalOmitOptions
-    >
-  >
-
-  /**
    * Create or update one Category.
    * @param {CategoryUpsertArgs} args - Arguments to update or create a Category.
    * @example
@@ -906,6 +794,33 @@ export interface CategoryDelegate<
     ExtArgs,
     GlobalOmitOptions
   >
+
+  /**
+   * Find zero or more Categories that matches the filter.
+   * @param {CategoryFindRawArgs} args - Select which filters you would like to apply.
+   * @example
+   * const category = await prisma.category.findRaw({
+   *   filter: { age: { $gt: 25 } }
+   * })
+   */
+  findRaw(
+    args?: Prisma.CategoryFindRawArgs,
+  ): Prisma.PrismaPromise<Prisma.JsonObject>
+
+  /**
+   * Perform aggregation operations on a Category.
+   * @param {CategoryAggregateRawArgs} args - Select which aggregations you would like to apply.
+   * @example
+   * const category = await prisma.category.aggregateRaw({
+   *   pipeline: [
+   *     { $match: { status: "registered" } },
+   *     { $group: { _id: "$country", total: { $sum: 1 } } }
+   *   ]
+   * })
+   */
+  aggregateRaw(
+    args?: Prisma.CategoryAggregateRawArgs,
+  ): Prisma.PrismaPromise<Prisma.JsonObject>
 
   /**
    * Count the number of Categories.
@@ -1379,27 +1294,6 @@ export type CategoryCreateManyArgs<
 }
 
 /**
- * Category createManyAndReturn
- */
-export type CategoryCreateManyAndReturnArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
-> = {
-  /**
-   * Select specific fields to fetch from the Category
-   */
-  select?: Prisma.CategorySelectCreateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the Category
-   */
-  omit?: Prisma.CategoryOmit<ExtArgs> | null
-  /**
-   * The data used to create many Categories.
-   */
-  data: Prisma.CategoryCreateManyInput | Prisma.CategoryCreateManyInput[]
-}
-
-/**
  * Category update
  */
 export type CategoryUpdateArgs<
@@ -1438,38 +1332,6 @@ export type CategoryUpdateManyArgs<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
-  /**
-   * The data used to update Categories.
-   */
-  data: Prisma.XOR<
-    Prisma.CategoryUpdateManyMutationInput,
-    Prisma.CategoryUncheckedUpdateManyInput
-  >
-  /**
-   * Filter which Categories to update
-   */
-  where?: Prisma.CategoryWhereInput
-  /**
-   * Limit how many Categories to update.
-   */
-  limit?: number
-}
-
-/**
- * Category updateManyAndReturn
- */
-export type CategoryUpdateManyAndReturnArgs<
-  ExtArgs extends runtime.Types.Extensions.InternalArgs =
-    runtime.Types.Extensions.DefaultArgs,
-> = {
-  /**
-   * Select specific fields to fetch from the Category
-   */
-  select?: Prisma.CategorySelectUpdateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the Category
-   */
-  omit?: Prisma.CategoryOmit<ExtArgs> | null
   /**
    * The data used to update Categories.
    */
@@ -1566,6 +1428,40 @@ export type CategoryDeleteManyArgs<
    * Limit how many Categories to delete.
    */
   limit?: number
+}
+
+/**
+ * Category findRaw
+ */
+export type CategoryFindRawArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+   */
+  filter?: runtime.InputJsonValue
+  /**
+   * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+   */
+  options?: runtime.InputJsonValue
+}
+
+/**
+ * Category aggregateRaw
+ */
+export type CategoryAggregateRawArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+   */
+  pipeline?: runtime.InputJsonValue[]
+  /**
+   * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+   */
+  options?: runtime.InputJsonValue
 }
 
 /**
