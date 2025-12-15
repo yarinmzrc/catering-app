@@ -1,13 +1,19 @@
 import { Nav, NavLink } from "@/components/nav"
 import { paths } from "@/config/paths"
+import { authOptions } from "@/lib/auth"
+import { getServerSession } from "next-auth"
+import { redirect } from "next/navigation"
 
 export const dynamic = "force-dynamic"
 
-export default function AdminLayout({
+export default async function AdminLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const session = await getServerSession(authOptions)
+  if (!session) redirect("/")
+
   return (
     <>
       <Nav>

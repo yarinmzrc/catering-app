@@ -4,7 +4,7 @@ import { useActionState, useState } from "react"
 import {
   Category,
   Product,
-} from "../../../../../prisma/generated/prisma/client"
+} from "../../../../../../prisma/generated/prisma/client"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { formatCurrency } from "@/lib/format"

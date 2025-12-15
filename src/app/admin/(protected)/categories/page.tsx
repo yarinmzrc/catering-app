@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { PageHeader } from "../_components/page-header"
+import { PageHeader } from "../../_components/page-header"
 import Link from "next/link"
 import {
   Table,
@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Category } from "../../../../prisma/generated/prisma/client"
+import { Category } from "../../../../../prisma/generated/prisma/client"
 import { paths } from "@/config/paths"
 import { getCategories } from "@/features/categories/server/get-categories"
 

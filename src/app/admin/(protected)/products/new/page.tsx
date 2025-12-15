@@ -1,5 +1,5 @@
 import { getCategories } from "@/features/categories/server/get-categories"
-import { PageHeader } from "../../_components/page-header"
+import { PageHeader } from "../../../_components/page-header"
 import { ProductForm } from "../_components/product-form"
 
 export default async function NewProductPage() {

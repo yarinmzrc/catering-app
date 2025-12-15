@@ -11,6 +11,7 @@ const createEnv = () => {
     CLOUDINARY_CLOUD_NAME: z.string(),
     CLOUDINARY_API_KEY: z.string(),
     CLOUDINARY_API_SECRET: z.string(),
+    PASSWORD_HASH: z.string(),
   })
 
   const envVars = {
@@ -23,6 +24,7 @@ const createEnv = () => {
     CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME,
     CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
     CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET,
+    PASSWORD_HASH: process.env.PASSWORD_HASH,
   }
 
   const parsedEnv = EnvSchema.safeParse(envVars)

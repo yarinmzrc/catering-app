@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { formatCurrency, formatNumber } from "@/lib/format"
-import { prisma } from "../../../prisma/client"
+import { prisma } from "../../../../prisma/client"
 
 async function getOrderData() {
   const data = await prisma.order.aggregate({

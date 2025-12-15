@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { PageHeader } from "../_components/page-header"
+import { PageHeader } from "../../_components/page-header"
 import Link from "next/link"
 import {
   Table,
@@ -9,7 +9,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { OrderItem, Product } from "../../../../prisma/generated/prisma/client"
+import {
+  OrderItem,
+  Product,
+} from "../../../../../prisma/generated/prisma/client"
 import { formatCurrency, formatNumber } from "@/lib/format"
 import { CheckCircle2, MoreVerticalIcon, XCircle } from "lucide-react"
 import {
