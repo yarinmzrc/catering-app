@@ -8,6 +8,17 @@ on:
     branches:
       - main
 
+env:
+  DATABASE_URL: ""
+  CLOUDINARY_CLOUD_NAME: ""
+  CLOUDINARY_API_KEY: ""
+  CLOUDINARY_API_SECRET: ""
+  ADMIN_USERNAME: ""
+  HASHED_ADMIN_PASSWORD: ""
+  NEXT_PUBLIC_SERVER_URL: ""
+  STRIPE_SECRET_KEY: ""
+  NEXT_PUBLIC_STRIPE_PUBLIC_KEY: ""
+
 jobs:
   build:
     runs-on: ubuntu-latest
