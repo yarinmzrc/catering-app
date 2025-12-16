@@ -2,6 +2,7 @@ import { type NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import bcrypt from "bcryptjs"
 import { prisma } from "../../prisma/client"
+import { Role } from "../../prisma/generated/prisma/enums"
 
 export const authOptions: NextAuthOptions = {
   session: { strategy: "jwt" },
@@ -19,7 +20,7 @@ export const authOptions: NextAuthOptions = {
           where: { email: credentials.email },
         })
 
-        if (!user || user.role !== "ADMIN") return null
+        if (!user || user.role !== Role.ADMIN) return null
 
         const isValid = await bcrypt.compare(
           credentials.password,
