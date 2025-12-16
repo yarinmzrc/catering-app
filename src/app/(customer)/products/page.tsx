@@ -1,4 +1,7 @@
-import { ProductCard, ProductCardSkeleton } from "@/components/product-card"
+import {
+  ProductCard,
+  ProductCardSkeleton,
+} from "@/features/products/components/product-card"
 import { getProducts } from "@/features/products/server/get-products-for-store"
 import { Suspense } from "react"
 

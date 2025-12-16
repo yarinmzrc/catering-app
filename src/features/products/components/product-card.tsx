@@ -6,8 +6,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "./ui/card"
-import { Button } from "./ui/button"
+} from "../../../components/ui/card"
+import { Button } from "../../../components/ui/button"
 import Link from "next/link"
 import { Image } from "@/components/image"
 import { paths } from "@/config/paths"
