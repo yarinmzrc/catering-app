@@ -9,3 +9,4 @@ coverage
 /public
 .prettierignore
 .prettierrc
+prisma/generated/
