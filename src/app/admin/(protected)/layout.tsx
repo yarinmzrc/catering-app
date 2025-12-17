@@ -1,8 +1,9 @@
+import { redirect } from "next/navigation"
+import { getServerSession } from "next-auth"
+
 import { Nav, NavLink } from "@/components/nav"
 import { paths } from "@/config/paths"
 import { authOptions } from "@/lib/auth"
-import { getServerSession } from "next-auth"
-import { redirect } from "next/navigation"
 
 export const dynamic = "force-dynamic"
 

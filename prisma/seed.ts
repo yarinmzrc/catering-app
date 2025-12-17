@@ -1,7 +1,10 @@
 import "dotenv/config"
+
 import { hash } from "bcryptjs"
-import { prisma } from "./client"
+
 import { env } from "@/config/env"
+
+import { prisma } from "./client"
 import { Role } from "./generated/prisma/enums"
 
 async function main() {

@@ -1,10 +1,12 @@
-import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
-import { paths } from "@/config/paths"
-import { Suspense } from "react"
-import { ProductCard, ProductCardSkeleton } from "./product-card"
 import Link from "next/link"
+import { Suspense } from "react"
+
+import { Button } from "@/components/ui/button"
+import { paths } from "@/config/paths"
+
 import { Product } from "../types"
+import { ProductCard, ProductCardSkeleton } from "./product-card"
 
 type ProductsGridSectionProps = {
   fetcher: () => Promise<Product[]>

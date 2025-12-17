@@ -1,4 +1,10 @@
+import Link from "next/link"
+
+import { Image } from "@/components/image"
+import { paths } from "@/config/paths"
 import { formatCurrency } from "@/lib/format"
+
+import { Button } from "../../../components/ui/button"
 import {
   Card,
   CardContent,
@@ -7,10 +13,6 @@ import {
   CardHeader,
   CardTitle,
 } from "../../../components/ui/card"
-import { Button } from "../../../components/ui/button"
-import Link from "next/link"
-import { Image } from "@/components/image"
-import { paths } from "@/config/paths"
 
 type ProductCardProps = {
   id: string
@@ -21,7 +23,6 @@ type ProductCardProps = {
 }
 
 export function ProductCard({
-  id,
   name,
   price,
   description,

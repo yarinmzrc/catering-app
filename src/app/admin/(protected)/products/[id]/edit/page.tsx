@@ -1,8 +1,10 @@
 import { notFound } from "next/navigation"
+
+import { getCategories } from "@/features/categories/server/get-categories"
+import { getProduct } from "@/features/products/server/get-product"
+
 import { PageHeader } from "../../../../_components/page-header"
 import { ProductForm } from "../../_components/product-form"
-import { getProduct } from "@/features/products/server/get-product"
-import { getCategories } from "@/features/categories/server/get-categories"
 
 export default async function EditProductPage({
   params,

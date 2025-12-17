@@ -1,11 +1,13 @@
 "use server"
 
-import { z } from "zod"
-import { prisma } from "../../../../prisma/client"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
+import { z } from "zod"
+
 import { paths } from "@/config/paths"
 import { uploadToCloudinary } from "@/lib/cloudinary"
+
+import { prisma } from "../../../../prisma/client"
 import { createProductSchema } from "../schemas"
 
 export async function createProduct(_: unknown, formData: FormData) {

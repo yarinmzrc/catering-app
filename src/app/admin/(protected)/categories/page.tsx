@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button"
-import { PageHeader } from "../../_components/page-header"
 import Link from "next/link"
+
+import { Button } from "@/components/ui/button"
 import {
   Table,
   TableBody,
@@ -10,8 +10,10 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { paths } from "@/config/paths"
-import { getCategories } from "@/features/categories/server/get-categories"
 import { Category } from "@/features/categories"
+import { getCategories } from "@/features/categories/server/get-categories"
+
+import { PageHeader } from "../../_components/page-header"
 
 export default async function AdminCategoriesPage() {
   const categories = await getCategories()

@@ -1,6 +1,8 @@
-import { paths } from "@/config/paths"
-import { Button } from "@/components/ui/button"
 import Link from "next/link"
+
+import { Button } from "@/components/ui/button"
+import { paths } from "@/config/paths"
+
 import { Category } from "../types"
 
 export function CategoryCard({ category }: { category: Category }) {

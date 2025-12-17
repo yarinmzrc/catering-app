@@ -1,5 +1,5 @@
-import { defineConfig, globalIgnores } from "eslint/config"
 import nextVitals from "eslint-config-next/core-web-vitals"
+import { defineConfig, globalIgnores } from "eslint/config"
 import nextTs from "eslint-config-next/typescript"
 import prettier from "eslint-config-prettier"
 import prettierPlugin from "eslint-plugin-prettier"
@@ -21,7 +21,7 @@ const eslintConfig = defineConfig([
       prettier: prettierPlugin,
       "simple-import-sort": simpleImportSort,
     },
-    files: ["**/*,{js,jsx,ts,tsx}"],
+    files: ["**/*.{js,jsx,ts,tsx}"],
     rules: {
       "prettier/prettier": "error",
       "simple-import-sort/imports": "error",

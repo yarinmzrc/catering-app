@@ -1,12 +1,14 @@
 "use server"
 
 import fs from "fs/promises"
+import { revalidatePath } from "next/cache"
 import { notFound, redirect } from "next/navigation"
 import { z } from "zod"
-import { prisma } from "../../../../prisma/client"
-import { revalidatePath } from "next/cache"
+
 import { getProduct } from "@/features/products/server/get-product"
 import { deleteFromCloudinary, uploadToCloudinary } from "@/lib/cloudinary"
+
+import { prisma } from "../../../../prisma/client"
 import { updateProductSchema } from "../schemas"
 
 export async function updateProduct(

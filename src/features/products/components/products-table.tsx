@@ -1,10 +1,17 @@
 "use client"
 
-import { useTransition } from "react"
-import { useRouter } from "next/navigation"
-import { deleteProduct } from "@/features/products/actions/delete-product"
-import { toggleProductAvailability } from "@/features/products/actions/toggle-product-availability"
+import { CheckCircle2, MoreVerticalIcon, XCircle } from "lucide-react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useTransition } from "react"
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import {
   Table,
   TableBody,
@@ -13,17 +20,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { formatCurrency, formatNumber } from "@/lib/format"
-import { CheckCircle2, MoreVerticalIcon, XCircle } from "lucide-react"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import { paths } from "@/config/paths"
 import { Product, WithCategory, WithOrderCount } from "@/features/products"
+import { deleteProduct } from "@/features/products/actions/delete-product"
+import { toggleProductAvailability } from "@/features/products/actions/toggle-product-availability"
+import { formatCurrency, formatNumber } from "@/lib/format"
 
 type ProductsTableProps = {
   products: (Product & WithCategory & WithOrderCount)[]

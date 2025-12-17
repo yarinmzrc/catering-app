@@ -1,26 +1,28 @@
 "use client"
 
+import Image from "next/image"
 import { useActionState, useState } from "react"
-import {
-  Category,
-  Product,
-} from "../../../../../../prisma/generated/prisma/client"
-import { Label } from "@/components/ui/label"
+import { useFormStatus } from "react-dom"
+
+import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { formatCurrency } from "@/lib/format"
+import { Label } from "@/components/ui/label"
 import {
   Select,
   SelectContent,
   SelectItem,
-  SelectValue,
   SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
-import { Button } from "@/components/ui/button"
-import { useFormStatus } from "react-dom"
-import Image from "next/image"
 import { createProduct } from "@/features/products/actions/create-product"
 import { updateProduct } from "@/features/products/actions/update-product"
+import { formatCurrency } from "@/lib/format"
+
+import {
+  Category,
+  Product,
+} from "../../../../../../prisma/generated/prisma/client"
 
 type ProductFormProps = {
   product?: Product

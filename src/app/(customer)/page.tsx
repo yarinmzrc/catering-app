@@ -1,7 +1,7 @@
-import { getMostPopularProducts } from "@/features/products/server/get-most-popular-products"
-import { getNewestProducts } from "@/features/products/server/get-newest-products"
 import { CategoriesGrid } from "@/features/categories/components/categories-grid"
 import { ProductsGrid } from "@/features/products/components/products-grid"
+import { getMostPopularProducts } from "@/features/products/server/get-most-popular-products"
+import { getNewestProducts } from "@/features/products/server/get-newest-products"
 
 export default function HomePage() {
   return (

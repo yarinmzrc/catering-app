@@ -1,11 +1,13 @@
+import { ArrowRight } from "lucide-react"
+import Link from "next/link"
+import { Suspense } from "react"
+
+import { BaseGrid } from "@/components/base-grid"
 import { Button } from "@/components/ui/button"
 import { paths } from "@/config/paths"
-import { ArrowRight } from "lucide-react"
-import { Suspense } from "react"
-import { CategoryCard, CategoryCardSkeleton } from "./category-card"
+
 import { getCategories } from "../server/get-categories"
-import { BaseGrid } from "@/components/base-grid"
-import Link from "next/link"
+import { CategoryCard, CategoryCardSkeleton } from "./category-card"
 
 export function CategoriesGrid() {
   return (

@@ -1,10 +1,11 @@
-import { Button } from "@/components/ui/button"
-import { PageHeader } from "../../_components/page-header"
 import Link from "next/link"
 
+import { Button } from "@/components/ui/button"
 import { paths } from "@/config/paths"
 import { getProductsForAdmin } from "@/features/products"
 import { ProductsTable } from "@/features/products"
+
+import { PageHeader } from "../../_components/page-header"
 
 export default async function AdminProductsPage() {
   const products = await getProductsForAdmin()
