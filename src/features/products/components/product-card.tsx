@@ -41,7 +41,7 @@ export function ProductCard({
       </CardContent>
       <CardFooter>
         <Button asChild size="lg" className="w-full">
-          <Link href={paths.app.products.purchase.getHref(id)}>Purchase</Link>
+          <Link href={paths.app.products.root.getHref()}>Purchase</Link>
         </Button>
       </CardFooter>
     </Card>

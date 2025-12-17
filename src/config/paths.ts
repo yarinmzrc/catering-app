@@ -40,9 +40,6 @@ export const paths = {
       root: {
         getHref: () => "/products",
       },
-      purchase: {
-        getHref: (id: string) => `/products/${id}/purchase`,
-      },
     },
     categories: {
       getHref: () => "/categories",
