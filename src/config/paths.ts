@@ -55,10 +55,5 @@ export const paths = {
         getHref: () => "/orders",
       },
     },
-    stripe: {
-      purchaseSuccess: {
-        getHref: () => "/stripe/purchase-success",
-      },
-    },
   },
 } as const
