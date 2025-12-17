@@ -1,6 +1,6 @@
 import { BaseGrid } from "@/components/base-grid"
-import { CategoryCard } from "@/features/categories/components/category-card"
 import { getCategory } from "@/features/categories/server/get-category"
+import { ProductCard } from "@/features/products"
 import { notFound } from "next/navigation"
 
 export default async function CategoryPage({
@@ -21,7 +21,7 @@ export default async function CategoryPage({
           <div className="text-muted-foreground">No products found</div>
         ) : (
           category.products.map((product) => (
-            <CategoryCard key={product.id} category={product} />
+            <ProductCard key={product.id} {...product} />
           ))
         )}
       </BaseGrid>
