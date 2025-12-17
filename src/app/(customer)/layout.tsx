@@ -1,6 +1,6 @@
 import { Nav, NavLink } from "@/components/nav"
 import { paths } from "@/config/paths"
-import { CartDrawer } from "@/features/cart/components/cart-drawer"
+import { CartSheet } from "@/features/cart/components/cart-drawer"
 
 export const dynamic = "force-dynamic"
 
@@ -18,7 +18,7 @@ export default function AppLayout({
             <NavLink href={paths.app.products.root.getHref()}>Products</NavLink>
             <NavLink href={paths.app.categories.getHref()}>Categories</NavLink>
           </div>
-          <CartDrawer />
+          <CartSheet />
         </div>
       </Nav>
       <div className="container mx-auto p-6">{children}</div>
