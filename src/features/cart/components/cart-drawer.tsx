@@ -13,12 +13,11 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { formatCurrency } from "@/lib/format"
-import { useCartItemsCount, useCartStore } from "@/stores/cart-store"
+
+import { useCart } from "../hooks/use-cart"
 
 export function CartSheet() {
-  const items = useCartStore((s) => s.items)
-  const updateQuantity = useCartStore((s) => s.updateQuantity)
-  const itemsCount = useCartItemsCount()
+  const { items, removeItem, updateQuantity, itemsCount } = useCart()
 
   return (
     <Sheet>
@@ -54,8 +53,11 @@ export function CartSheet() {
                 <Button
                   size="sm"
                   className="p-1"
-                  disabled={item.quantity === 1}
-                  onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                  onClick={() =>
+                    item.quantity === 1
+                      ? removeItem(item.id)
+                      : updateQuantity(item.id, item.quantity - 1)
+                  }
                 >
                   <MinusIcon className="text-xs" />
                 </Button>

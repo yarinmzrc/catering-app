@@ -25,12 +25,18 @@ type CartActions = {
   clearCart: () => void
 }
 
-type Store = CartState & CartActions
+type CartGetters = {
+  getItems: () => CartProduct[]
+}
+
+type Store = CartState & CartActions & CartGetters
 
 export const useCartStore = create<Store>()(
   persist(
     immer((set, get) => ({
+      // state
       items: [],
+      // actions
       addItem: (product: CartProduct, quantity: number = 1) =>
         set((state) => {
           state.items = [...state.items, { ...product, quantity }]
@@ -46,6 +52,8 @@ export const useCartStore = create<Store>()(
           )
         }),
       clearCart: () => set(initialState),
+      // getters
+      getItems: () => get().items,
     })),
     {
       name: "catering-cart",

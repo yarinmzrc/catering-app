@@ -2,8 +2,8 @@
 
 import { Image } from "@/components/image"
 import { Button } from "@/components/ui/button"
+import { useCart } from "@/features/cart/hooks/use-cart"
 import { formatCurrency } from "@/lib/format"
-import { useCartStore } from "@/stores/cart-store"
 
 import {
   Card,
@@ -29,8 +29,9 @@ export function ProductCard({
   description,
   imagePath,
 }: ProductCardProps) {
-  const addItem = useCartStore((s) => s.addItem)
-  const removeItem = useCartStore((s) => s.removeItem)
+  const { items, updateQuantity, addItem } = useCart()
+
+  const cartItem = items.find((i) => i.id === id)
 
   return (
     <Card className="flex flex-col overflow-hidden pt-0">
@@ -49,13 +50,12 @@ export function ProductCard({
           size="lg"
           className="w-full"
           onClick={() =>
-            addItem({ id, name, imagePath, price, quantity: 2 }, 4)
+            cartItem
+              ? updateQuantity(cartItem.id, cartItem.quantity + 1)
+              : addItem({ id, name, price, imagePath, quantity: 0 })
           }
         >
-          Add
-        </Button>
-        <Button size="lg" className="w-full" onClick={() => removeItem(id)}>
-          Remove
+          Add To Cart
         </Button>
       </CardFooter>
     </Card>
