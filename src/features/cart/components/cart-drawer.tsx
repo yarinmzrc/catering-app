@@ -40,6 +40,11 @@ export function CartSheet() {
             Lets see how much you want to buy!
           </SheetDescription>
         </SheetHeader>
+        {items.length === 0 && (
+          <div className="flex items-center border-y p-4">
+            <ShoppingCartIcon size={16} className="mr-2" /> Your cart is empty
+          </div>
+        )}
         <ScrollArea className="h-full overflow-hidden">
           {items.map((item) => (
             <div key={item.id} className="flex items-center gap-2 border-b p-3">
@@ -80,9 +85,11 @@ export function CartSheet() {
           ))}
         </ScrollArea>
 
-        <SheetFooter>
-          <Button className="w-full">Checkout</Button>
-        </SheetFooter>
+        {items.length > 0 && (
+          <SheetFooter>
+            <Button className="w-full">Checkout</Button>
+          </SheetFooter>
+        )}
       </SheetContent>
     </Sheet>
   )
