@@ -1,5 +1,4 @@
 import { create } from "zustand"
-import { createJSONStorage, persist } from "zustand/middleware"
 import { immer } from "zustand/middleware/immer"
 
 export type CartProduct = {
@@ -32,44 +31,26 @@ type CartGetters = {
 type Store = CartState & CartActions & CartGetters
 
 export const useCartStore = create<Store>()(
-  persist(
-    immer((set, get) => ({
-      // state
-      items: [],
-      // actions
-      addItem: (product: CartProduct, quantity: number = 1) =>
-        set((state) => {
-          state.items = [...state.items, { ...product, quantity }]
-        }),
-      removeItem: (productId: string) =>
-        set((state) => {
-          state.items = state.items.filter((p) => p.id !== productId)
-        }),
-      updateQuantity: (productId, quantity) =>
-        set((state) => {
-          state.items = state.items.map((p) =>
-            p.id === productId ? { ...p, quantity } : p,
-          )
-        }),
-      clearCart: () => set(initialState),
-      // getters
-      getItems: () => get().items,
-    })),
-    {
-      name: "catering-cart",
-      storage: createJSONStorage(() => localStorage),
-    },
-  ),
+  immer((set, get) => ({
+    // state
+    items: [],
+    // actions
+    addItem: (product: CartProduct, quantity: number = 1) =>
+      set((state) => {
+        state.items = [...state.items, { ...product, quantity }]
+      }),
+    removeItem: (productId: string) =>
+      set((state) => {
+        state.items = state.items.filter((p) => p.id !== productId)
+      }),
+    updateQuantity: (productId, quantity) =>
+      set((state) => {
+        state.items = state.items.map((p) =>
+          p.id === productId ? { ...p, quantity } : p,
+        )
+      }),
+    clearCart: () => set(initialState),
+    // getters
+    getItems: () => get().items,
+  })),
 )
-
-export const useCartTotal = () => {
-  return useCartStore((s) =>
-    s.items.reduce((acc, item) => item.price * item.quantity + acc, 0),
-  )
-}
-
-export const useCartItemsCount = () => {
-  return useCartStore((s) =>
-    s.items.reduce((acc, item) => item.quantity + acc, 0),
-  )
-}
