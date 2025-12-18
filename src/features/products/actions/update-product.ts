@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache"
 import { notFound, redirect } from "next/navigation"
 import { z } from "zod"
 
+import { paths } from "@/config/paths"
 import { getProduct } from "@/features/products/server/get-product"
 import { deleteFromCloudinary, uploadToCloudinary } from "@/lib/cloudinary"
 
@@ -57,7 +58,7 @@ export async function updateProduct(
   revalidatePath("/")
   revalidatePath("/products")
 
-  redirect("/admin/products")
+  redirect(paths.admin.products.root.getHref())
 }
 
 export async function toggleProductAvailability(

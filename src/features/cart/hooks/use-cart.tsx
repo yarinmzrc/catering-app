@@ -12,6 +12,7 @@ export function useCart() {
         removeItem: s.removeItem,
         updateQuantity: s.updateQuantity,
         itemsCount: items.reduce((acc, item) => item.quantity + acc, 0),
+        clearCart: s.clearCart,
       }
     }),
   )

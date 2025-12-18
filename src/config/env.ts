@@ -11,6 +11,8 @@ const createEnv = () => {
     CLOUDINARY_API_SECRET: z.string(),
     NEXTAUTH_SECRET: z.string(),
     ADMIN_PASSWORD: z.string().optional(),
+    TWILIO_ACCOUNT_SID: z.string(),
+    TWILIO_AUTH_TOKEN: z.string(),
   })
 
   const envVars = {

@@ -3,6 +3,9 @@ export const paths = {
     root: {
       getHref: () => "/admin",
     },
+    login: {
+      getHref: () => "/admin/login",
+    },
     products: {
       root: {
         getHref: () => "/admin/products",
@@ -51,6 +54,9 @@ export const paths = {
       root: {
         getHref: () => "/orders",
       },
+    },
+    purchaseSuccess: {
+      getHref: () => "/purchase-success",
     },
   },
 } as const

@@ -1,6 +1,9 @@
 "use client"
 
 import { MinusIcon, PlusIcon, ShoppingCartIcon } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { useTransition } from "react"
+import { toast } from "sonner"
 
 import { Image } from "@/components/image"
 import { Button } from "@/components/ui/button"
@@ -14,12 +17,28 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import { paths } from "@/config/paths"
 import { formatCurrency } from "@/lib/format"
+import { createMessage } from "@/lib/messages"
 
 import { useCart } from "../hooks/use-cart"
 
 export function CartSheet() {
-  const { items, removeItem, updateQuantity, itemsCount } = useCart()
+  const router = useRouter()
+  const { items, removeItem, updateQuantity, itemsCount, clearCart } = useCart()
+  const [isPending, startTransition] = useTransition()
+
+  const handlePurchase = async () => {
+    startTransition(async () => {
+      const result = await createMessage(items)
+      if (result.success) {
+        router.push(paths.app.purchaseSuccess.getHref())
+        clearCart()
+      } else {
+        toast.error("Failed to place order")
+      }
+    })
+  }
 
   return (
     <Sheet>
@@ -87,7 +106,13 @@ export function CartSheet() {
 
         {items.length > 0 && (
           <SheetFooter>
-            <Button className="w-full">Checkout</Button>
+            <Button
+              className="w-full"
+              onClick={handlePurchase}
+              disabled={isPending}
+            >
+              {isPending ? "Purchasing..." : "Purchase"}
+            </Button>
           </SheetFooter>
         )}
       </SheetContent>

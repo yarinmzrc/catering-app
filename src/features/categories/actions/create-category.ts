@@ -3,6 +3,8 @@
 import { redirect } from "next/navigation"
 import { z } from "zod"
 
+import { paths } from "@/config/paths"
+
 import { prisma } from "../../../../prisma/client"
 
 const createCategorySchema = z.object({
@@ -26,5 +28,5 @@ export async function createCategory(_: unknown, formData: FormData) {
     },
   })
 
-  redirect("/admin/products")
+  redirect(paths.admin.categories.root.getHref())
 }
