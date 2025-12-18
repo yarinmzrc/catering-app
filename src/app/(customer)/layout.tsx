@@ -1,6 +1,6 @@
 import { Nav, NavLink } from "@/components/nav"
 import { paths } from "@/config/paths"
-import { CartSheet } from "@/features/cart/components/cart-drawer"
+import { CartSheet } from "@/core/cart/components/cart-drawer"
 
 export const dynamic = "force-dynamic"
 

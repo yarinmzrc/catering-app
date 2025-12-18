@@ -8,7 +8,7 @@ generator client {
 
 datasource db {
   provider = "mongodb"
-  url = env("DATABASE_URL")
+  // url = "mongodb://localhost:27017/catering?replicaSet=rs0"
 }
 
 model User {
@@ -18,8 +18,6 @@ model User {
   role Role @default(ADMIN)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  orders Order[]
 }
 
 enum Role {
@@ -59,10 +57,20 @@ model Order {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  userId String @db.ObjectId
-  orderItems OrderItem[]
+  status OrderStatus @default(PENDING)
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  guestEmail String
+  guestName String?
+  guestPhone String?
+
+  orderItems OrderItem[]
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  CANCELLED
+  FULFILLED
 }
 
 model OrderItem {
