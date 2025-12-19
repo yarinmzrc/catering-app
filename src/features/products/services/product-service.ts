@@ -8,6 +8,10 @@ export class ProductService {
     private readonly imageRepository = new ImageRepository(),
   ) {}
 
+  async findById(id: string) {
+    return this.productRepository.findById(id)
+  }
+
   async createProduct(data: {
     name: string
     price: number
@@ -90,5 +94,24 @@ export class ProductService {
 
   async getMostPopularProducts() {
     return this.productRepository.getMostPopularProducts()
+  }
+
+  async getNewestProducts() {
+    return this.productRepository.getNewestProducts()
+  }
+
+  async getProductsForStore() {
+    return this.productRepository.getProductsForStore()
+  }
+
+  async getProductsForAdmin() {
+    return this.productRepository.getProductsForAdmin()
+  }
+
+  async toggleProductAvailability(id: string, isAvailableForSale: boolean) {
+    return this.productRepository.toggleProductAvailability(
+      id,
+      isAvailableForSale,
+    )
   }
 }

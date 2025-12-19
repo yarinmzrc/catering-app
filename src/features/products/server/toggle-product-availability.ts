@@ -1,13 +1,11 @@
 "use server"
 
-import { prisma } from "../../../../prisma/client"
+import { ProductService } from "../services/product-service"
 
 export async function toggleProductAvailability(
   productId: string,
   isAvailableForSale: boolean,
 ) {
-  await prisma.product.update({
-    where: { id: productId },
-    data: { isAvailableForSale },
-  })
+  const productService = new ProductService()
+  await productService.toggleProductAvailability(productId, isAvailableForSale)
 }

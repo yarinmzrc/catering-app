@@ -30,4 +30,37 @@ export class ProductRepository {
       take: 6,
     })
   }
+
+  async getNewestProducts() {
+    return prisma.product.findMany({
+      where: { isAvailableForSale: true },
+      orderBy: { createdAt: "desc" },
+      take: 6,
+    })
+  }
+
+  async getProductsForStore() {
+    return prisma.product.findMany({
+      where: { isAvailableForSale: true },
+      orderBy: { name: "asc" },
+    })
+  }
+
+  async getProductsForAdmin() {
+    return prisma.product.findMany({
+      include: {
+        category: true,
+        _count: {
+          select: { orderItems: true },
+        },
+      },
+    })
+  }
+
+  async toggleProductAvailability(id: string, isAvailableForSale: boolean) {
+    return prisma.product.update({
+      where: { id },
+      data: { isAvailableForSale },
+    })
+  }
 }

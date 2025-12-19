@@ -1,5 +1,6 @@
-import { prisma } from "../../../../prisma/client"
+import { ProductService } from "../services/product-service"
 
 export const getProduct = async (id: string) => {
-  return await prisma.product.findUnique({ where: { id } })
+  const productService = new ProductService()
+  return await productService.findById(id)
 }

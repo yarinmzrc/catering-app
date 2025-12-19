@@ -1,8 +1,6 @@
-import { prisma } from "../../../../prisma/client"
+import { ProductService } from "../services/product-service"
 
 export const getProductsForStore = async () => {
-  return await prisma.product.findMany({
-    where: { isAvailableForSale: true },
-    orderBy: { name: "asc" },
-  })
+  const productService = new ProductService()
+  return await productService.getProductsForStore()
 }

@@ -6,7 +6,6 @@ import { notFound, redirect } from "next/navigation"
 import { z } from "zod"
 
 import { paths } from "@/config/paths"
-import { getProduct } from "@/features/products/server/get-product"
 
 import { prisma } from "../../../../prisma/client"
 import { ProductRepository } from "../repositories/product-repository"
