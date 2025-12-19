@@ -38,3 +38,10 @@ export type PrismaProductWithOrderCount = Prisma.ProductGetPayload<{
     }
   }
 }>
+
+export type CreateProductInput = Omit<
+  Product,
+  "id" | "createdAt" | "updatedAt" | "isAvailableForSale"
+> & {
+  categoryId: string
+}

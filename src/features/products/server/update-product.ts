@@ -7,10 +7,11 @@ import { z } from "zod"
 
 import { paths } from "@/config/paths"
 import { getProduct } from "@/features/products/server/get-product"
-import { deleteFromCloudinary, uploadToCloudinary } from "@/lib/cloudinary"
 
 import { prisma } from "../../../../prisma/client"
+import { ProductRepository } from "../repositories/product-repository"
 import { updateProductSchema } from "../schemas"
+import { ProductService } from "../services/product-service"
 
 export async function updateProduct(
   id: string,
@@ -20,40 +21,19 @@ export async function updateProduct(
   const result = updateProductSchema.safeParse(
     Object.fromEntries(formData.entries()),
   )
-  console.log({ result })
   if (result.success === false) {
     return z.flattenError(result.error).fieldErrors
   }
 
   const data = result.data
-  const product = await getProduct(id)
 
-  if (product == null) return notFound()
-
-  let imageResult = null
-  if (data.imagePath != null && data.imagePath.size > 0) {
-    await deleteFromCloudinary(product.imagePublicId)
-
-    try {
-      const uploadResult = await uploadToCloudinary(data.imagePath, "products")
-      imageResult = uploadResult
-    } catch {
-      console.error("Error uploading image to Cloudinary")
-      throw new Error("Error uploading image to Cloudinary")
-    }
+  try {
+    const productService = new ProductService()
+    await productService.updateProduct(id, data)
+  } catch (error) {
+    console.error(error)
+    return notFound()
   }
-
-  await prisma.product.update({
-    where: { id },
-    data: {
-      name: data.name,
-      price: data.price,
-      description: data.description,
-      imagePath: imageResult!.secure_url,
-      imagePublicId: imageResult!.public_id,
-      categoryId: data.categoryId,
-    },
-  })
 
   revalidatePath("/")
   revalidatePath("/products")

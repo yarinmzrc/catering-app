@@ -1,16 +1,19 @@
 "use server"
 
-import fs from "fs/promises"
 import { revalidatePath } from "next/cache"
 import { notFound } from "next/navigation"
 
-import { prisma } from "../../../../prisma/client"
+import { ProductService } from "../services/product-service"
 
 export async function deleteProduct(productId: string) {
-  const product = await prisma.product.delete({ where: { id: productId } })
-  if (product == null) return notFound()
+  const productService = new ProductService()
 
-  await fs.unlink(`public${product.imagePath}`)
+  try {
+    await productService.deleteProduct(productId)
+  } catch (error) {
+    console.error(error)
+    return notFound()
+  }
 
   revalidatePath("/")
   revalidatePath("/products")

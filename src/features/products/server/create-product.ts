@@ -5,10 +5,9 @@ import { redirect } from "next/navigation"
 import { z } from "zod"
 
 import { paths } from "@/config/paths"
-import { uploadToCloudinary } from "@/lib/cloudinary"
 
-import { prisma } from "../../../../prisma/client"
 import { createProductSchema } from "../schemas"
+import { ProductService } from "../services/product-service"
 
 export async function createProduct(_: unknown, formData: FormData) {
   const result = createProductSchema.safeParse(
@@ -21,28 +20,8 @@ export async function createProduct(_: unknown, formData: FormData) {
 
   const data = result.data
 
-  let imageResult = null
-
-  if (data.imagePath && data.imagePath.size > 0) {
-    try {
-      const uploadResult = await uploadToCloudinary(data.imagePath, "products")
-      imageResult = uploadResult
-    } catch {
-      console.error("Error uploading image to Cloudinary")
-      throw new Error("Error uploading image to Cloudinary")
-    }
-  }
-
-  await prisma.product.create({
-    data: {
-      name: data.name,
-      price: data.price,
-      description: data.description,
-      imagePath: imageResult!.secure_url,
-      imagePublicId: imageResult!.public_id,
-      categoryId: data.categoryId,
-    },
-  })
+  const productService = new ProductService()
+  await productService.createProduct(data)
 
   revalidatePath("/")
   revalidatePath("/products")

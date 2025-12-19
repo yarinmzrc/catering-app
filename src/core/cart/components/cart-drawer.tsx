@@ -2,7 +2,6 @@
 
 import {
   ArrowLeftIcon,
-  Car,
   MinusIcon,
   PlusIcon,
   ShoppingCartIcon,
