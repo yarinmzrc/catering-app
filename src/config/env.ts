@@ -25,6 +25,8 @@ const createEnv = () => {
     CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
+    TWILIO_ACCOUNT_SID: process.env.TWILIO_ACCOUNT_SID,
+    TWILIO_AUTH_TOKEN: process.env.TWILIO_AUTH_TOKEN,
   }
 
   const parsedEnv = EnvSchema.safeParse(envVars)
