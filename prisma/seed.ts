@@ -3,20 +3,20 @@ import "dotenv/config"
 import { hash } from "bcryptjs"
 
 import { env } from "@/config/env"
+import db from "@/lib/db"
 
-import { prisma } from "./client"
 import { Role } from "./generated/prisma/enums"
 
 async function main() {
   // Clean up existsing data
-  // await prisma.orderItem.deleteMany()
-  await prisma.order.deleteMany()
-  await prisma.product.deleteMany()
-  await prisma.category.deleteMany()
+  // await db.orderItem.deleteMany()
+  await db.order.deleteMany()
+  await db.product.deleteMany()
+  await db.category.deleteMany()
 
   // Create Admin user for testing
   const password = await hash(env.ADMIN_PASSWORD ?? "password", 12)
-  await prisma.user.upsert({
+  await db.user.upsert({
     where: { email: "admin@admin.com" },
     update: {},
     create: {
@@ -38,7 +38,7 @@ async function main() {
   const categories = []
 
   for (const cat of categoriesData) {
-    const category = await prisma.category.create({ data: cat })
+    const category = await db.category.create({ data: cat })
     categories.push(category)
   }
 
@@ -94,7 +94,7 @@ async function main() {
   ]
 
   for (const product of productsData) {
-    await prisma.product.create({ data: product })
+    await db.product.create({ data: product })
   }
 
   console.log("Data has been seeded")
@@ -106,5 +106,5 @@ main()
     process.exit(1)
   })
   .finally(async () => {
-    await prisma.$disconnect()
+    await db.$disconnect()
   })

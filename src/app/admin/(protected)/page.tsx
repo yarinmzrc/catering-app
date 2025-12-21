@@ -5,12 +5,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import db from "@/lib/db"
 import { formatCurrency, formatNumber } from "@/lib/format"
 
-import { prisma } from "../../../../prisma/client"
-
 async function getOrderData() {
-  const data = await prisma.order.aggregate({
+  const data = await db.order.aggregate({
     _sum: { pricePaid: true },
     _count: true,
   })
@@ -22,7 +21,7 @@ async function getOrderData() {
 }
 
 async function getUserData() {
-  const data = await prisma.user.aggregate({
+  const data = await db.user.aggregate({
     _count: true,
   })
   return {
@@ -32,10 +31,10 @@ async function getUserData() {
 
 async function getProductData() {
   const [activeCount, inactiveCount] = await Promise.all([
-    prisma.product.count({
+    db.product.count({
       where: { isAvailableForSale: true },
     }),
-    prisma.product.count({
+    db.product.count({
       where: { isAvailableForSale: false },
     }),
   ])

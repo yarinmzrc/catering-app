@@ -6,8 +6,8 @@ import { notFound, redirect } from "next/navigation"
 import { z } from "zod"
 
 import { paths } from "@/config/paths"
+import db from "@/lib/db"
 
-import { prisma } from "../../../../prisma/client"
 import { updateProduct } from "../dal/mutations"
 import { updateProductSchema } from "../schemas"
 
@@ -42,14 +42,14 @@ export async function toggleProductAvailability(
   productId: string,
   isAvailableForSale: boolean,
 ) {
-  await prisma.product.update({
+  await db.product.update({
     where: { id: productId },
     data: { isAvailableForSale },
   })
 }
 
 export async function deleteProduct(productId: string) {
-  const product = await prisma.product.delete({ where: { id: productId } })
+  const product = await db.product.delete({ where: { id: productId } })
   if (product == null) return notFound()
 
   await fs.unlink(`public${product.imagePath}`)

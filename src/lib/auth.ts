@@ -2,8 +2,8 @@ import bcrypt from "bcryptjs"
 import { type NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 
-import { prisma } from "../../prisma/client"
 import { Role } from "../../prisma/generated/prisma/enums"
+import db from "./db"
 
 export const authOptions: NextAuthOptions = {
   session: { strategy: "jwt" },
@@ -17,7 +17,7 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         if (!credentials?.email || !credentials.password) return null
 
-        const user = await prisma.user.findUnique({
+        const user = await db.user.findUnique({
           where: { email: credentials.email },
         })
 
