@@ -1,20 +1,18 @@
 import db from "@/lib/db"
 
 import { getProductsByIds } from "../../products/dal/queries"
+import { OrderCreateInput } from "../dtos"
 
-export async function createOrder(dto: {
-  guestEmail: string
-  guestName?: string
-  guestPhone?: string
-  items: { productId: string; quantity: number }[]
-}) {
-  const products = await getProductsByIds(dto.items.map((i) => i.productId))
+export async function createOrder(input: OrderCreateInput) {
+  const products = await getProductsByIds(
+    input.orderItems.map((i) => i.productId),
+  )
 
-  if (products.length !== dto.items.length) {
+  if (products.length !== input.orderItems.length) {
     throw new Error("Product not found")
   }
 
-  const orderItems = dto.items.map((item) => {
+  const orderItems = input.orderItems.map((item) => {
     const product = products.find((p) => p.id === item.productId)!
     return {
       productId: product.id,
@@ -31,9 +29,9 @@ export async function createOrder(dto: {
   return db.order.create({
     data: {
       pricePaid,
-      guestEmail: dto.guestEmail,
-      guestName: dto.guestName,
-      guestPhone: dto.guestPhone,
+      guestEmail: input.guestEmail,
+      guestName: input.guestName,
+      guestPhone: input.guestPhone,
       orderItems: {
         create: orderItems,
       },

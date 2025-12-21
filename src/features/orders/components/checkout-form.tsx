@@ -10,7 +10,7 @@ import { SheetFooter } from "@/components/ui/sheet"
 import { paths } from "@/config/paths"
 import { useCartStore } from "@/stores/cart-store"
 
-import { createOrderAction } from "../actions/place-order"
+import { createOrderAction } from "../actions/create-order"
 
 export function CheckoutForm() {
   const router = useRouter()

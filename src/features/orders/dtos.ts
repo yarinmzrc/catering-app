@@ -28,3 +28,10 @@ export const OrderStatus = {
 }
 
 export type OrderStatus = keyof typeof OrderStatus
+
+export type OrderCreateInput = Pick<
+  OrderDTO,
+  "guestEmail" | "guestName" | "guestPhone"
+> & {
+  orderItems: Pick<OrderItemDTO, "productId" | "quantity">[]
+}

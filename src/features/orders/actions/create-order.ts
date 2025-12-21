@@ -21,17 +21,15 @@ export async function createOrderAction(
     return { error: z.flattenError(result.error).fieldErrors }
   }
 
-  const dto = {
+  await createOrder({
     guestEmail: result.data.email,
     guestName: result.data.name,
     guestPhone: result.data.phone,
-    items: cartItems.map((item) => ({
+    orderItems: cartItems.map((item) => ({
       productId: item.id,
       quantity: item.quantity,
     })),
-  }
-
-  await createOrder(dto)
+  })
 
   return { success: true }
 }
