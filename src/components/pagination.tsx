@@ -15,9 +15,14 @@ import { PaginatedResult } from "@/types/pagination"
 type PaginationProps = {
   metadata: PaginatedResult<unknown>["metadata"]
   activePage: number
+  onPageChange?: (page: number) => void
 }
 
-export function Pagination({ metadata, activePage = 1 }: PaginationProps) {
+export function Pagination({
+  metadata,
+  onPageChange,
+  activePage = 1,
+}: PaginationProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -25,6 +30,14 @@ export function Pagination({ metadata, activePage = 1 }: PaginationProps) {
     const params = new URLSearchParams(searchParams)
     params.set("page", String(page))
     router.push(`?${params.toString()}`)
+  }
+
+  const handlePageChange = (page: number) => {
+    if (onPageChange) {
+      onPageChange(page)
+    } else {
+      goToPage(page)
+    }
   }
 
   if (metadata.totalPages <= 1) return null
@@ -37,33 +50,32 @@ export function Pagination({ metadata, activePage = 1 }: PaginationProps) {
             href={metadata.hasPreviousPage ? `?page=${activePage - 1}` : "#"}
             onClick={(e) => {
               e.preventDefault()
-              metadata.hasPreviousPage ? goToPage(activePage - 1) : null
+              metadata.hasPreviousPage ? handlePageChange(activePage - 1) : null
             }}
           />
         </PaginationItem>
-        {metadata.totalPages > 1 &&
-          Array.from({ length: metadata.totalPages }, (_, i) => i + 1).map(
-            (page) => (
-              <PaginationItem key={page}>
-                <PaginationLink
-                  href={`?page=${page}`}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    goToPage(page)
-                  }}
-                  isActive={page === activePage}
-                >
-                  {page}
-                </PaginationLink>
-              </PaginationItem>
-            ),
-          )}
+        {Array.from({ length: metadata.totalPages }, (_, i) => i + 1).map(
+          (page) => (
+            <PaginationItem key={page}>
+              <PaginationLink
+                href={`?page=${page}`}
+                onClick={(e) => {
+                  e.preventDefault()
+                  handlePageChange(page)
+                }}
+                isActive={page === activePage}
+              >
+                {page}
+              </PaginationLink>
+            </PaginationItem>
+          ),
+        )}
         <PaginationItem>
           <PaginationNext
             href={metadata.hasNextPage ? `?page=${activePage + 1}` : "#"}
             onClick={(e) => {
               e.preventDefault()
-              metadata.hasNextPage ? goToPage(activePage + 1) : null
+              metadata.hasNextPage ? handlePageChange(activePage + 1) : null
             }}
           />
         </PaginationItem>
