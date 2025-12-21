@@ -1,6 +1,6 @@
 import db from "@/lib/db"
 
-import { mapProductWithCategoryAndOrderCount } from "../mappers"
+import { mapProductListItem } from "../mappers"
 
 export async function getProduct(id: string) {
   return db.product.findUnique({ where: { id } })
@@ -43,7 +43,7 @@ export async function getProductsForAdmin() {
     },
   })
 
-  return products.map(mapProductWithCategoryAndOrderCount)
+  return products.map(mapProductListItem)
 }
 
 export async function toggleProductAvailability(

@@ -1,6 +1,6 @@
 import { Prisma } from "../../../prisma/generated/prisma/client"
 
-export type Product = {
+export type ProductDTO = {
   id: string
   name: string
   price: number
@@ -12,14 +12,8 @@ export type Product = {
   updatedAt: Date
 }
 
-export type WithCategory = {
-  category: {
-    id: string
-    name: string
-  }
-}
-
-export type WithOrderCount = {
+export type ProductListItemDTO = ProductDTO & {
+  categoryName: string
   orderCount: number
 }
 
@@ -40,7 +34,7 @@ export type PrismaProductWithOrderCount = Prisma.ProductGetPayload<{
 }>
 
 export type CreateProductInput = Omit<
-  Product,
+  ProductDTO,
   "id" | "createdAt" | "updatedAt" | "isAvailableForSale"
 > & {
   categoryId: string

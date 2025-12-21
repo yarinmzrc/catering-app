@@ -5,7 +5,7 @@ import { Suspense } from "react"
 import { Button } from "@/components/ui/button"
 import { paths } from "@/config/paths"
 
-import { Product } from "../types"
+import { Product } from "../dtos"
 import { ProductCard, ProductCardSkeleton } from "./product-card"
 
 type ProductsGridSectionProps = {

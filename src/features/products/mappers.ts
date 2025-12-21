@@ -2,12 +2,11 @@ import { Product as PrismaProduct } from "../../../prisma/generated/prisma/clien
 import {
   PrismaProductWithCategory,
   PrismaProductWithOrderCount,
-  Product,
-  WithCategory,
-  WithOrderCount,
-} from "./types"
+  ProductDTO,
+  ProductListItemDTO,
+} from "./dtos"
 
-export function mapBaseProduct(prisma: PrismaProduct): Product {
+export function mapBaseProduct(prisma: PrismaProduct): ProductDTO {
   return {
     id: prisma.id,
     name: prisma.name,
@@ -21,23 +20,12 @@ export function mapBaseProduct(prisma: PrismaProduct): Product {
   }
 }
 
-export function mapProductWithCategory(
-  prisma: PrismaProductWithCategory,
-): Product & WithCategory {
+export function mapProductListItem(
+  prisma: PrismaProductWithCategory & PrismaProductWithOrderCount,
+): ProductListItemDTO {
   return {
     ...mapBaseProduct(prisma),
-    category: {
-      id: prisma.category.id,
-      name: prisma.category.name,
-    },
-  }
-}
-
-export function mapProductWithCategoryAndOrderCount(
-  prisma: PrismaProductWithCategory & PrismaProductWithOrderCount,
-): Product & WithCategory & WithOrderCount {
-  return {
-    ...mapProductWithCategory(prisma),
     orderCount: prisma._count.orderItems,
+    categoryName: prisma.category.name,
   }
 }

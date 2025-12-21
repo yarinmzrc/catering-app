@@ -24,10 +24,10 @@ import { paths } from "@/config/paths"
 import { formatCurrency, formatNumber } from "@/lib/format"
 
 import { deleteProduct, toggleProductAvailability } from "../dal/mutations"
-import { Product, WithCategory, WithOrderCount } from "../types"
+import { ProductListItemDTO } from "../dtos"
 
 type ProductsTableProps = {
-  products: (Product & WithCategory & WithOrderCount)[]
+  products: ProductListItemDTO[]
 }
 
 export function ProductsTable({ products }: ProductsTableProps) {
@@ -69,7 +69,7 @@ export function ProductsTable({ products }: ProductsTableProps) {
             </TableCell>
             <TableCell>{product.name}</TableCell>
             <TableCell>{formatCurrency(product.price)}</TableCell>
-            <TableCell>{product.category.name}</TableCell>
+            <TableCell>{product.categoryName}</TableCell>
             <TableCell>{formatNumber(product.orderCount ?? 0)}</TableCell>
             <TableCell>
               <DropdownMenu>
