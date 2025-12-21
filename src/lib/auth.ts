@@ -4,7 +4,6 @@ import CredentialsProvider from "next-auth/providers/credentials"
 
 import { Role } from "../../prisma/generated/prisma/enums"
 import db from "./db"
-
 export const authOptions: NextAuthOptions = {
   session: { strategy: "jwt" },
   providers: [
