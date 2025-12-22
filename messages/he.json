@@ -30,7 +30,8 @@
   "product": {
     "title": "מוצרים",
     "subtitle": "בוא נראה כמה אתה רוצה לקנות!",
-    "emptyState": "אין מוצרים"
+    "emptyState": "אין מוצרים",
+    "addedToBasket": "נוסף לעגלת הקניות"
   },
   "order": {
     "title": "הזמנות",
@@ -97,6 +98,18 @@
           "name": "שם הקטגוריה",
           "actions": "פעולות"
         }
+      },
+      "form": {
+        "name": "שם הקטגוריה",
+        "image": "תמונה",
+        "submit": "שמור",
+        "submitting": "שומר..."
+      },
+      "create": {
+        "title": "הוסף קטגוריה"
+      },
+      "edit": {
+        "title": "ערוך קטגוריה"
       }
     },
     "orders": {

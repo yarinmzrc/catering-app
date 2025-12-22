@@ -19,7 +19,7 @@ export default async function AdminLayout({
   return (
     <>
       <AdminNav />
-      <div className="container mx-auto pt-26">{children}</div>
+      <div className="container mx-auto px-4 pt-26">{children}</div>
     </>
   )
 }

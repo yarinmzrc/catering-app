@@ -1,6 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 import { useActionState, useEffect } from "react"
 import { useFormStatus } from "react-dom"
 import { toast } from "sonner"
@@ -19,6 +20,8 @@ type CategoryFormProps = {
 }
 
 export function CategoryForm({ category }: CategoryFormProps) {
+  const t = useTranslations("admin.categories.form")
+
   const router = useRouter()
   const [data, action] = useActionState(
     category == null
@@ -39,7 +42,7 @@ export function CategoryForm({ category }: CategoryFormProps) {
   return (
     <form action={action} className="space-y-8">
       <div className="space-y-2">
-        <Label htmlFor="name">Name</Label>
+        <Label htmlFor="name">{t("name")}</Label>
         <Input
           id="name"
           name="name"
@@ -51,7 +54,7 @@ export function CategoryForm({ category }: CategoryFormProps) {
         )}
       </div>
       <div className="space-y-2">
-        <Label htmlFor="imagePath">Image</Label>
+        <Label htmlFor="imagePath">{t("image")}</Label>
         <Input
           type="file"
           id="imagePath"
@@ -76,10 +79,12 @@ export function CategoryForm({ category }: CategoryFormProps) {
 }
 
 function SubmitButton() {
+  const t = useTranslations("admin.categories.form")
+
   const { pending } = useFormStatus()
   return (
     <Button disabled={pending} type="submit">
-      {pending ? "Saving..." : "Submit"}
+      {pending ? t("submitting") : t("submit")}
     </Button>
   )
 }

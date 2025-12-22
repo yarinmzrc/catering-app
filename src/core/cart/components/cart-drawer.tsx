@@ -54,10 +54,7 @@ function CartItem({ item }: { item: CartProduct }) {
       : updateQuantity(item.id, item.quantity - 1)
 
   return (
-    <div
-      key={item.id}
-      className="flex flex-row-reverse items-center gap-2 border-b p-4"
-    >
+    <div key={item.id} className="flex items-center gap-2 border-b p-4">
       <Image src={item.imagePath} alt={item.name} width={40} height={40} />
 
       <div className="flex flex-col gap-2">

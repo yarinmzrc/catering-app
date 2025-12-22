@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation"
+import { getTranslations } from "next-intl/server"
 
 import { PageHeader } from "@/app/admin/_components/page-header"
 import { getCategory } from "@/features/categories/dal/queries"
@@ -10,15 +11,17 @@ export default async function AdminEditCategoryPage({
 }: {
   params: Promise<{ id: string }>
 }) {
+  const t = await getTranslations("admin.categories")
+
   const id = (await params).id
   const category = await getCategory(id)
 
   if (category == null) return notFound()
 
   return (
-    <>
-      <PageHeader>Edit Category</PageHeader>
+    <div className="flex flex-col gap-12">
+      <PageHeader>{t("edit.title")}</PageHeader>
       <CategoryForm category={category} />
-    </>
+    </div>
   )
 }

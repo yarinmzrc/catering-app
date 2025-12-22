@@ -1,6 +1,5 @@
 import Link from "next/link"
 
-import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { paths } from "@/config/paths"
 
@@ -29,8 +28,8 @@ export function CategoryCard({ category }: { category: CategoryDTO }) {
 
 export function CategoryCardSkeleton() {
   return (
-    <Button asChild variant="outline">
-      <div className="h-6 animate-pulse rounded-full bg-gray-300"></div>
-    </Button>
+    <Card className="group relative h-48 cursor-pointer overflow-hidden rounded-none p-0 shadow-none">
+      <CardContent className="relative z-10 flex h-full animate-pulse items-center justify-center bg-gray-200"></CardContent>
+    </Card>
   )
 }

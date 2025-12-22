@@ -50,7 +50,7 @@ export function ProductCard({
     }
 
     await new Promise((resolve) => setTimeout(resolve, 500))
-    toast.success("Product added to cart")
+    toast.success(t("product.addedToBasket"))
     setIsAdding(false)
   }
 
@@ -68,6 +68,7 @@ export function ProductCard({
       </CardContent>
       <CardFooter className="flex flex-col gap-2">
         <Button
+          variant="outline"
           size="lg"
           className={cn("w-full", {
             "pointer-events-none opacity-50": isAdding,
