@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server"
+
 import { Pagination } from "@/components/pagination"
 import {
   Select,
@@ -21,6 +23,8 @@ import { getOrders } from "../dal/queries"
 import { OrderDTO, OrderStatus } from "../dtos"
 
 export async function OrdersTable({ page = 1 }: { page: number }) {
+  const t = await getTranslations("admin.orders.table")
+
   const { data: orders, metadata }: PaginatedResult<OrderDTO> = await getOrders(
     {
       page,
@@ -28,15 +32,19 @@ export async function OrdersTable({ page = 1 }: { page: number }) {
     },
   )
 
+  if (orders == null || orders.length === 0) {
+    return <p>{t("emptyState")}</p>
+  }
+
   return (
     <>
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>מייל לקוח</TableHead>
-            <TableHead>נוצרה ב</TableHead>
-            <TableHead>מחיר</TableHead>
-            <TableHead>סטטוס</TableHead>
+            <TableHead>{t("columns.email")}</TableHead>
+            <TableHead>{t("columns.createdAt")}</TableHead>
+            <TableHead>{t("columns.price")}</TableHead>
+            <TableHead>{t("columns.status")}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -68,15 +76,17 @@ export async function OrdersTable({ page = 1 }: { page: number }) {
   )
 }
 
-export function OrdersTableSkeleton() {
+export async function OrdersTableSkeleton() {
+  const t = await getTranslations("admin.orders.table")
+
   return (
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>מייל לקוח</TableHead>
-          <TableHead>נוצר ב</TableHead>
-          <TableHead>מחיר</TableHead>
-          <TableHead>סטטוס</TableHead>
+          <TableHead>{t("columns.email")}</TableHead>
+          <TableHead>{t("columns.createdAt")}</TableHead>
+          <TableHead>{t("columns.price")}</TableHead>
+          <TableHead>{t("columns.status")}</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>

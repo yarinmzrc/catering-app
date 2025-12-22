@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server"
 import { Suspense } from "react"
 
 import {
@@ -14,6 +15,8 @@ type AdminOrdersPageProps = {
 export default async function AdminOrdersPage({
   searchParams,
 }: AdminOrdersPageProps) {
+  const t = await getTranslations("admin.orders")
+
   const pageSearchParam = (await searchParams).page
   const page =
     typeof pageSearchParam === "string" ? parseInt(pageSearchParam) : 1
@@ -21,7 +24,7 @@ export default async function AdminOrdersPage({
   return (
     <>
       <div className="mb-4 flex items-center justify-between gap-4">
-        <PageHeader>Orders</PageHeader>
+        <PageHeader>{t("title")}</PageHeader>
       </div>
       <Suspense key={page} fallback={<OrdersTableSkeleton />}>
         <OrdersTable page={page} />

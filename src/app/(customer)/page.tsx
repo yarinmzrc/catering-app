@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server"
+
 import { CategoriesGrid } from "@/features/categories/components/categories-grid"
 import { ProductsGrid } from "@/features/products/components/products-grid"
 import {
@@ -5,12 +7,14 @@ import {
   getNewestProducts,
 } from "@/features/products/dal/queries"
 
-export default function HomePage() {
+export default async function HomePage() {
+  const t = await getTranslations("homePage")
+
   return (
     <main className="flex flex-col gap-12 py-12">
       <CategoriesGrid />
-      <ProductsGrid title="הפופולרים ביותר" fetcher={getMostPopularProducts} />
-      <ProductsGrid title="החדשים ביותר" fetcher={getNewestProducts} />
+      <ProductsGrid title={t("popular")} fetcher={getMostPopularProducts} />
+      <ProductsGrid title={t("new")} fetcher={getNewestProducts} />
     </main>
   )
 }

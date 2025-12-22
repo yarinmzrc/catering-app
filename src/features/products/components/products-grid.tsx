@@ -1,5 +1,6 @@
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
+import { getTranslations } from "next-intl/server"
 import { Suspense } from "react"
 
 import { Button } from "@/components/ui/button"
@@ -13,15 +14,19 @@ type ProductsGridSectionProps = {
   title: string
 }
 
-export function ProductsGrid({ fetcher, title }: ProductsGridSectionProps) {
+export async function ProductsGrid({
+  fetcher,
+  title,
+}: ProductsGridSectionProps) {
+  const t = await getTranslations("buttons")
   return (
     <div className="space-y-4">
       <div className="flex gap-4">
         <h2 className="text-2xl font-semibold">{title}</h2>
         <Button asChild variant="outline">
           <Link href={paths.app.products.root.getHref()}>
+            <span>{t("showAll")}</span>
             <ArrowLeft className="size-4" />
-            <span>הצג הכל</span>
           </Link>
         </Button>
       </div>

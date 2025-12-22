@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { getTranslations } from "next-intl/server"
 import { Suspense } from "react"
 
 import { Button } from "@/components/ui/button"
@@ -7,7 +8,9 @@ import { paths } from "@/config/paths"
 import { getCategories } from "../dal/queries"
 import { CategoryCard, CategoryCardSkeleton } from "./category-card"
 
-export function CategoriesGrid() {
+export async function CategoriesGrid() {
+  const t = await getTranslations("buttons")
+
   return (
     <div className="space-y-12">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-5">
@@ -18,7 +21,7 @@ export function CategoriesGrid() {
       <div className="text-center">
         <Button asChild>
           <Link href={paths.app.products.root.getHref()}>
-            <span>לכל המוצרים לחץ כאן</span>
+            <span>{t("toAllProductsClickHere")}</span>
           </Link>
         </Button>
       </div>

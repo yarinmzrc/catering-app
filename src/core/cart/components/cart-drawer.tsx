@@ -7,6 +7,7 @@ import {
   ShoppingBagIcon,
   ShoppingCartIcon,
 } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { Activity, useState } from "react"
 
 import { Image } from "@/components/image"
@@ -33,9 +34,11 @@ const CartStep = {
 }
 
 function CartEmptyState() {
+  const t = useTranslations("cart")
   return (
     <div className="flex items-center border-y p-4">
-      <ShoppingCartIcon size={16} className="mr-2" /> Your cart is empty
+      <ShoppingCartIcon size={16} className="ml-2" />{" "}
+      <span>{t("emptyState")}</span>
     </div>
   )
 }
@@ -127,6 +130,8 @@ function CartStepContent({
 }
 
 export function CartSheet() {
+  const t = useTranslations("cart")
+
   const { itemsCount } = useCart()
   const [step, setStep] = useState(CartStep.Items)
 
@@ -149,10 +154,10 @@ export function CartSheet() {
                   <ArrowLeftIcon />
                 </Button>
               )}
-              <span>עגלת קניות</span>
+              <span>{t("title")}</span>
             </div>
           </SheetTitle>
-          <SheetDescription>בוא נראה כמה אתה רוצה לקנות!</SheetDescription>
+          <SheetDescription>{t("subtitle")}</SheetDescription>
         </SheetHeader>
         {itemsCount === 0 ? (
           <CartEmptyState />

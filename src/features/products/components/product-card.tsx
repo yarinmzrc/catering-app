@@ -1,5 +1,6 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -33,6 +34,8 @@ export function ProductCard({
   description,
   imagePath,
 }: ProductCardProps) {
+  const t = useTranslations()
+
   const { items, updateQuantity, addItem } = useCart()
   const cartItem = items.find((i) => i.id === id)
   const [isAdding, setIsAdding] = useState(false)
@@ -71,7 +74,7 @@ export function ProductCard({
           })}
           onClick={handleAddToCart}
         >
-          {isAdding ? "מוסיף..." : "הוסף לסל"}
+          {isAdding ? t("buttons.addingToBusket") : t("buttons.addToBusket")}
         </Button>
       </CardFooter>
     </Card>

@@ -17,7 +17,9 @@ export default function AppLayout({
       <div className="container mx-auto p-6">{children}</div>
       <footer className="bg-primary">
         <div className="container mx-auto flex items-center justify-between p-6">
-          <span className="text-primary-foreground">footer goes here</span>
+          <span className="text-primary-foreground">
+            {new Date().getFullYear()} Catering &copy;
+          </span>
         </div>
       </footer>
     </>

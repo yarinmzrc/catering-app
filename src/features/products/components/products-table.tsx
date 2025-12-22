@@ -3,6 +3,7 @@
 import { CheckCircle2, MoreVerticalIcon, XCircle } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 import { useTransition } from "react"
 
 import {
@@ -31,8 +32,10 @@ type ProductsTableProps = {
 }
 
 export function ProductsTable({ products }: ProductsTableProps) {
+  const t = useTranslations("admin.products.table")
+
   if (products.length === 0) {
-    return <p>No products found.</p>
+    return <p>{t("emptyState")}</p>
   }
 
   return (
@@ -40,14 +43,14 @@ export function ProductsTable({ products }: ProductsTableProps) {
       <TableHeader>
         <TableRow>
           <TableHead className="w-0">
-            <span className="sr-only">זמין לרכישה</span>
+            <span className="sr-only">{t("columns.availableForPurchase")}</span>
           </TableHead>
-          <TableHead>שם המוצר</TableHead>
-          <TableHead>מחיר</TableHead>
-          <TableHead>קטגוריה</TableHead>
-          <TableHead>מספר הזמנות</TableHead>
+          <TableHead>{t("columns.name")}</TableHead>
+          <TableHead>{t("columns.price")}</TableHead>
+          <TableHead>{t("columns.category")}</TableHead>
+          <TableHead>{t("columns.orderCount")}</TableHead>
           <TableHead className="w-0">
-            <span className="sr-only">פעולות</span>
+            <span className="sr-only">{t("columns.actions")}</span>
           </TableHead>
         </TableRow>
       </TableHeader>
@@ -57,12 +60,12 @@ export function ProductsTable({ products }: ProductsTableProps) {
             <TableCell>
               {product.isAvailableForSale ? (
                 <>
-                  <span className="sr-only">זמין לרכישה</span>
+                  <span className="sr-only">{t("columns.available")}</span>
                   <CheckCircle2 />
                 </>
               ) : (
                 <>
-                  <span className="sr-only">לא זמין לרכישה</span>
+                  <span className="sr-only">{t("columns.notAvailable")}</span>
                   <XCircle className="text-red-800" />
                 </>
               )}
@@ -111,6 +114,8 @@ export function ActiveToggleDropdownAction({
   id,
   isAvailableForSale,
 }: ActiveToggleDropdownActionProps) {
+  const t = useTranslations("admin.products.actions")
+
   const [isPending, startTransition] = useTransition()
   const router = useRouter()
   return (
@@ -123,7 +128,7 @@ export function ActiveToggleDropdownAction({
         })
       }}
     >
-      {isAvailableForSale ? "הסרה מזמינות" : "הוספה לזמינות"}
+      {isAvailableForSale ? t("disable") : t("enable")}
     </DropdownMenuItem>
   )
 }
@@ -133,6 +138,8 @@ type DeleteDropdownItemProps = {
   disabled?: boolean
 }
 export function DeleteDropdownItem({ id, disabled }: DeleteDropdownItemProps) {
+  const t = useTranslations("admin.products.actions")
+
   const [isPending, startTransition] = useTransition()
   const router = useRouter()
   return (
@@ -145,7 +152,7 @@ export function DeleteDropdownItem({ id, disabled }: DeleteDropdownItemProps) {
         })
       }}
     >
-      <span className="text-red-500">מחיקה</span>
+      <span className="text-red-500">{t("delete")}</span>
     </DropdownMenuItem>
   )
 }

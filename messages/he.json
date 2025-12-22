@@ -1,0 +1,119 @@
+{
+  "nav": {
+    "home": "דף הבית",
+    "products": "מוצרים",
+    "categories": "קטגוריות",
+    "orders": "הזמנות"
+  },
+  "homePage": {
+    "popular": "הפופולרים ביותר",
+    "new": "החדשים ביותר"
+  },
+  "cart": {
+    "title": "עגלת קניות",
+    "subtitle": "בוא נראה כמה אתה רוצה לקנות!",
+    "emptyState": "עגלת הקניות שלך ריקה"
+  },
+  "buttons": {
+    "toAllProductsClickHere": "לכל המוצרים לחץ כאן",
+    "addToBusket": "הוסף לסל",
+    "addingToBusket": "מוסיף...",
+    "showAll": "הצג הכל",
+    "cancel": "בטל",
+    "save": "שמור"
+  },
+  "category": {
+    "title": "קטגוריות",
+    "subtitle": "בוא נראה כמה אתה רוצה לקנות!",
+    "emptyState": "אין קטגוריות"
+  },
+  "product": {
+    "title": "מוצרים",
+    "subtitle": "בוא נראה כמה אתה רוצה לקנות!",
+    "emptyState": "אין מוצרים"
+  },
+  "order": {
+    "title": "הזמנות",
+    "subtitle": "בוא נראה כמה אתה רוצה לקנות!",
+    "emptyState": "אין הזמנות"
+  },
+  "admin": {
+    "nav": {
+      "home": "דשבורד",
+      "products": "מוצרים",
+      "categories": "קטגוריות",
+      "orders": "הזמנות"
+    },
+    "dashboard": {
+      "title": "דשבורד",
+      "cards": {
+        "sales": {
+          "title": "מכירות"
+        },
+        "customers": {
+          "title": "לקוחות",
+          "subtitle": "{count} לקוחות"
+        },
+        "activeProducts": {
+          "title": "מוצרים פעילים",
+          "subtitle": "{count} לא פעילים"
+        }
+      }
+    },
+    "products": {
+      "title": "מוצרים",
+      "addButton": "הוסף מוצר",
+      "actions": {
+        "edit": "ערוך",
+        "delete": "מחק",
+        "enable": "הפעל",
+        "disable": "השבת"
+      },
+      "table": {
+        "emptyState": "אין מוצרים",
+        "columns": {
+          "name": "שם המוצר",
+          "price": "מחיר",
+          "category": "קטגוריה",
+          "orderCount": "מספר ההזמנות",
+          "availableForPurchase": "זמין לרכישה",
+          "enabled": "פעיל",
+          "actions": "פעולות",
+          "available": "זמין לרכישה",
+          "notAvailable": "לא זמין לרכישה"
+        }
+      }
+    },
+    "categories": {
+      "title": "קטגוריות",
+      "addButton": "הוסף קטגוריה",
+      "actions": {
+        "edit": "ערוך",
+        "delete": "מחק"
+      },
+      "table": {
+        "emptyState": "אין קטגוריות",
+        "columns": {
+          "name": "שם הקטגוריה",
+          "actions": "פעולות"
+        }
+      }
+    },
+    "orders": {
+      "title": "הזמנות",
+      "table": {
+        "emptyState": "אין הזמנות",
+        "columns": {
+          "email": "מייל לקוח",
+          "createdAt": "תאריך הזמנה",
+          "name": "שם המוצר",
+          "price": "מחיר",
+          "category": "קטגוריה",
+          "orderCount": "מספר ההזמנות",
+          "actions": "פעולות",
+          "status": "סטטוס"
+        }
+      }
+    }
+  }
+}

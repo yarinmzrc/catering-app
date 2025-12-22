@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server"
+
 import {
   Card,
   CardContent,
@@ -46,6 +48,8 @@ async function getProductData() {
 }
 
 export default async function Admin() {
+  const t = await getTranslations("admin.dashboard.cards")
+
   const [orderData, userData, productData] = await Promise.all([
     getOrderData(),
     getUserData(),
@@ -55,20 +59,22 @@ export default async function Admin() {
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
       <DashboardCard
-        title="Sales"
+        title={t("sales.title")}
         subtitle={formatNumber(orderData.amount)}
         body={formatCurrency(orderData.amount)}
       />
 
       <DashboardCard
-        title="Customers"
-        subtitle={`${formatNumber(userData.count)} users`}
+        title={t("customers.title")}
+        subtitle={t("customers.subtitle", { count: userData.count })}
         body={formatCurrency(userData.count)}
       />
 
       <DashboardCard
-        title="Active Products"
-        subtitle={`${formatNumber(productData.inactiveCount)} Inactive`}
+        title={t("activeProducts.title")}
+        subtitle={t("activeProducts.subtitle", {
+          count: productData.activeCount,
+        })}
         body={formatNumber(productData.activeCount)}
       />
     </div>
