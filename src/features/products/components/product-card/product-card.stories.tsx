@@ -1,23 +1,6 @@
-// components/product-card/product-card.stories.tsx
 import type { Meta, StoryObj } from "@storybook/react"
 
 import { ProductCard, ProductCardSkeleton } from "./product-card"
-
-// Mock implementations
-const mockCart = {
-  items: [],
-  addItem: () => console.log("addItem called"),
-  updateQuantity: () => console.log("updateQuantity called"),
-}
-
-const mockT = (key: string) => {
-  const map: Record<string, string> = {
-    "product.addedToBasket": "Added to basket!",
-    "buttons.addingToBusket": "Adding...",
-    "buttons.addToBusket": "Add to basket",
-  }
-  return map[key] ?? key
-}
 
 const meta: Meta<typeof ProductCard> = {
   title: "Products/ProductCard",
