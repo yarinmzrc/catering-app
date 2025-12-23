@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation"
 import { useActionState, useEffect } from "react"
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { SheetFooter } from "@/components/ui/sheet"

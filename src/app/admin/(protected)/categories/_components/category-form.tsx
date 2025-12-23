@@ -7,7 +7,7 @@ import { useFormStatus } from "react-dom"
 import { toast } from "sonner"
 
 import { Image } from "@/components/image"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { paths } from "@/config/paths"

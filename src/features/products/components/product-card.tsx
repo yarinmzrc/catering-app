@@ -5,7 +5,7 @@ import { useState } from "react"
 import { toast } from "sonner"
 
 import { Image } from "@/components/image"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button/button"
 import { useCart } from "@/core/cart/hooks/use-cart"
 import { formatCurrency } from "@/lib/format"
 import { cn } from "@/lib/utils"

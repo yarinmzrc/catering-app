@@ -11,7 +11,7 @@ import { useTranslations } from "next-intl"
 import { Activity, useState } from "react"
 
 import { Image } from "@/components/image"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import {
   Sheet,

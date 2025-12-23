@@ -2,7 +2,7 @@ import Link from "next/link"
 import { getTranslations } from "next-intl/server"
 import { Suspense } from "react"
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button/button"
 import { paths } from "@/config/paths"
 
 import { getCategories } from "../dal/queries"

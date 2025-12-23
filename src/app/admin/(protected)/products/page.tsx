@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { getTranslations } from "next-intl/server"
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button/button"
 import { paths } from "@/config/paths"
 import { ProductsTable } from "@/features/products/components/products-table"
 import { getProductsForAdmin } from "@/features/products/dal/queries"
